@@ -20,12 +20,8 @@ const ObsController = () => {
 
     const [retryConnectionIn, setRetryConnectionIn] = useState(3000);
 
-    useEffect(() => {
-        openKonasteApiConnection();
-        openObsConnection();
-    }, []);
-
     const messageEventListener = async (event: MessageEvent<string>) => {
+        console.log(event.data);
         if (event.data === currentUI) {
             return;
         }
@@ -46,7 +42,6 @@ const ObsController = () => {
     const openKonasteApiConnection = () => {
         console.log('Opening konaste-api WebSocket');
         const konasteWebsocket = new WebSocket(`ws://${konasteHost}:4573/ws/ui`);
-        konasteWebsocket.addEventListener("message", messageEventListener);
 
         setKonasteApi(konasteWebsocket);
     }
@@ -65,6 +60,18 @@ const ObsController = () => {
             setObsIsConnecting(false);
         }
     }
+
+    useEffect(() => {
+        openKonasteApiConnection();
+        openObsConnection();
+    }, []);
+
+    useEffect(() => {
+        if (konasteApi === undefined) return;
+        konasteApi.addEventListener("message", messageEventListener);
+        return () =>
+            konasteApi.removeEventListener("message", messageEventListener);
+    }, [obsIsConnected, konasteApi, currentUI]);
 
     if (konasteApi === undefined || obsIsConnecting || !obsIsConnected) {
         return <></>;

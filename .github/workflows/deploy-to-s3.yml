@@ -33,4 +33,4 @@ jobs:
          aws-region: ${{ vars.AWS_REGION }}
      - run: |
          aws s3 cp ./dist/index.html s3://${{ vars.BUCKET_NAME }}/ --cache-control max-age=60
-         aws s3 cp ./dist/assets s3://${{ vars.BUCKET_NAME }}/assets --recursive --cache-control max-age=2592000
+         aws s3 cp ./dist/assets s3://${{ vars.BUCKET_NAME }}/assets --recursive --cache-control max-age=86400
