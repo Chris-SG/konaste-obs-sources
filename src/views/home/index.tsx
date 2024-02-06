@@ -7,12 +7,13 @@ const Home = () => {
                     You are viewing this page using HTTPS. This means by default, you can only connect
                     to websockets using the secure (WSS) protocol, which is not currently supported by
                     konaste-api or OBS.
-                    <br />
+                    <br/>
                     For Google Chrome and other Chromium-based browsers, navigate to this page's
                     <a href="chrome://settings/content/siteDetails?site=https%3A%2F%2Fkonaste.bauxe.dev">Settings</a>
                     page and change <b>Insecure Content</b> to Allow. This will only apply for this website.
-                    <br />
-                    For Firefox, navigate to <b>about:config</b>, search for <b>network.websocket.allowInsecureFromHTTPS</b>
+                    <br/>
+                    For Firefox, navigate to <b>about:config</b>, search
+                    for <b>network.websocket.allowInsecureFromHTTPS</b>
                     and change this setting to True. Note that this is a global setting. It is recommended you
                     do not leave this setting enabled for normal web browsing.
                 </div>}
@@ -30,8 +31,9 @@ const Home = () => {
                     <div className="description">
                         konaste-api is a zero-setup server that runs on whichever computer Sound Voltex
                         is running on. This will create a locally running server on port 4573. To verify
-                        that the server is running, navigate to <a href="http://localhost:4573">http://localhost:4573</a>.
-                        <br />
+                        that the server is running, navigate to <a
+                        href="http://localhost:4573">http://localhost:4573</a>.
+                        <br/>
                         Note that you can access this on your local network by using your computer's local IP,
                         or from outside of your local network if you set up port forwarding appropriately.
                     </div>
@@ -43,7 +45,8 @@ const Home = () => {
                     </div>
                     <h3>3. Configure konaste-obs-sources</h3>
                     <div className="description">
-                        If you only plan to use the data-source endpoints, you only need to configure the <b>API host</b>
+                        If you only plan to use the data-source endpoints, you only need to configure the <b>API
+                        host</b>
                         property. If you wish to make use of the OBS WebSocket capabilities, be sure to enable WebSocket
                         Server in OBS and configure accordingly.
                     </div>
@@ -61,6 +64,11 @@ const Home = () => {
                     scene display based on in-game UI. For this, you must enable
                     websockets in OBS (<b>Tools -&gt; WebSocket Server Settings</b>)
                     and configure OBS settings in <a href="/config">/config</a>.
+                </div>
+                <div className="endpoint"><a href="/gameplay/score">/gameplay/score</a></div>
+                <div className="description">
+                    Opens a WebSocket connection konaste-api to emit live play
+                    data.
                 </div>
                 <h2>Contributing</h2>
                 <div className="description">

@@ -1,24 +1,46 @@
 import {useEffect, useState} from "react";
 
+interface Stats {
+    chartMaxEx: number,
+    chartMaxCombo: number,
+    maxCombo: number,
+    score: number,
+    ex: number,
+    missedEx: number,
+    combo: number,
+    timestamp: number
+}
+
 const Score = () => {
     const konasteHost = localStorage.getItem('api-host')!;
     const [konasteApi, setKonasteApi] = useState<WebSocket>();
-    const [score, setScore] = useState(0);
+    const [stats, setStats] = useState<Stats | undefined>(undefined);
+
+    const messageEventListener = async (event: MessageEvent<string>) => {
+        console.log(event.data);
+        if (event.data === "null") {
+            setStats(undefined)
+            return;
+        }
+        setStats(JSON.parse(event.data));
+    }
 
     useEffect(() => {
         openKonasteApiConnection();
     }, []);
 
+    useEffect(() => {
+        if (konasteApi === undefined) return;
+        konasteApi.addEventListener("message", messageEventListener);
+        return () =>
+            konasteApi.removeEventListener("message", messageEventListener);
+    }, [konasteApi]);
+
     const openKonasteApiConnection = () => {
         console.log('Opening konaste-api WebSocket');
-        const konasteWebsocket = new WebSocket(`ws://${konasteHost}:4573/ws/gameplay/score`);
-        konasteWebsocket.addEventListener("message", messageEventListener);
+        const konasteWebsocket = new WebSocket(`ws://${konasteHost}:4573/ws/game/nowplaying/stats?rate=100`);
 
         setKonasteApi(konasteWebsocket);
-    }
-
-    const messageEventListener = async (event: MessageEvent<number>) => {
-        setScore(event.data);
     }
 
     const GetGrade = (score: number) => {
@@ -34,13 +56,18 @@ const Score = () => {
         return 'S';
     }
 
-    if (konasteApi === undefined) {
+    if (konasteApi === undefined || stats === undefined) {
         return <></>;
     }
 
     return <>
-        <div id="score" className={GetGrade(score)}>{score}</div>
-        <div id="ex" className={GetGrade(score)}>{score}</div>
+        <div id="score" className={GetGrade(stats.score)}>{stats.score}</div>
+        <div id="ex" className={GetGrade(stats.score)}>{stats.score}</div>
+        {
+            stats.ex === 0 && stats.missedEx === 0 ?
+                <div id="rate">100.00</div> :
+                <div id="rate">{((stats.ex * 100) / (stats.ex + stats.missedEx)).toFixed(2)}</div>
+        }
     </>;
 }
 
