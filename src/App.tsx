@@ -1,9 +1,9 @@
 // import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
-import './App.css'
-import { Route } from 'wouter';
-import Config from './views/config';
+import "./App.css";
+import { Route } from "wouter";
+import Config from "./views/config";
 import ObsController from "./views/obs-controller";
 import Home from "./views/home";
 import Score from "./views/gameplay/score";
@@ -13,14 +13,20 @@ function App() {
 
   return (
     <>
-      <Route path="/"><Home /></Route>
-      <Route path="/config"><Config /></Route>
-      <Route path="/obs"><ObsController /></Route>
-        <Route path="/gameplay" nest>
-            <Route path="/score">
-                <Score />
-            </Route>
+      <Route path="/">
+        <Home />
+      </Route>
+      <Route path="/config">
+        <Config />
+      </Route>
+      <Route path="/obs">
+        <ObsController />
+      </Route>
+      <Route path="/gameplay" nest>
+        <Route path="/score">
+          <Score />
         </Route>
+      </Route>
       {/*<div>*/}
       {/*  <a href="https://vitejs.dev" target="_blank">*/}
       {/*    <img src={viteLogo} className="logo" alt="Vite logo" />*/}
@@ -42,7 +48,7 @@ function App() {
       {/*  Click on the Vite and React logos to learn more*/}
       {/*</p>*/}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

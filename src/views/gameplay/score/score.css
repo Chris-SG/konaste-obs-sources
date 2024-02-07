@@ -1,11 +1,29 @@
-#score {
+div {
+  text-align: left;
+  border-radius: 4px;
+}
 
+#score {
+  font-size: 3.2em;
+  font-variant: tabular-nums;
+}
+
+#score::before {
+  font-weight: bold;
+  font-size: 3rem;
+  font-family: sans-serif;
+  padding: 2rem;
+}
+
+#ex {
+  font-size: 1.2em;
+  font-variant: tabular-nums;
 }
 
 #score.D {
-    color: #888888;
+  color: #888888;
 }
 
 #score.S {
-    color: gold;
+  color: gold;
 }

@@ -17,20 +17,20 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     steps:
-     - uses: actions/checkout@v4
-     - name: Use Node.js
-       uses: actions/setup-node@v4
-       with:
-         node-version: '20.x'
-     - run: corepack enable
-     - run: yarn
-     - run: yarn build
-     - name: configure aws credentials
-       uses: aws-actions/configure-aws-credentials@v4
-       with:
-         role-to-assume: ${{ secrets.ROLE_ARN }}
-         role-session-name: konaste-session
-         aws-region: ${{ vars.AWS_REGION }}
-     - run: |
-         aws s3 cp ./dist/index.html s3://${{ vars.BUCKET_NAME }}/ --cache-control max-age=60
-         aws s3 cp ./dist/assets s3://${{ vars.BUCKET_NAME }}/assets --recursive --cache-control max-age=86400
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+      - run: corepack enable
+      - run: yarn
+      - run: yarn build
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.ROLE_ARN }}
+          role-session-name: konaste-session
+          aws-region: ${{ vars.AWS_REGION }}
+      - run: |
+          aws s3 cp ./dist/index.html s3://${{ vars.BUCKET_NAME }}/ --cache-control max-age=60
+          aws s3 cp ./dist/assets s3://${{ vars.BUCKET_NAME }}/assets --recursive --cache-control max-age=86400
