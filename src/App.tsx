@@ -7,6 +7,7 @@ import Config from "./views/config";
 import ObsController from "./views/obs-controller";
 import Home from "./views/home";
 import Score from "./views/gameplay/score";
+import Websockets from "./views/instructions/websockets";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -25,6 +26,11 @@ function App() {
       <Route path="/gameplay" nest>
         <Route path="/score">
           <Score />
+        </Route>
+      </Route>
+      <Route path="/instructions" nest>
+        <Route path="/websockets">
+          <Websockets />
         </Route>
       </Route>
       {/*<div>*/}

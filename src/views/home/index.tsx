@@ -9,20 +9,8 @@ const Home = () => {
             can only connect to websockets using the secure (WSS) protocol,
             which is not currently supported by konaste-api or OBS.
             <br />
-            For <b>Google Chrome</b> and other Chromium-based browsers, navigate
-            to this page's
-            <a href="chrome://settings/content/siteDetails?site=https%3A%2F%2Fkonaste.bauxe.dev">
-              {" "}
-              Settings{" "}
-            </a>
-            page and change <b>Insecure Content</b> to Allow. This will only
-            apply for this website.
-            <br />
-            For Firefox, navigate to <b>about:config</b>, search for{" "}
-            <b>network.websocket.allowInsecureFromHTTPS</b> and change this
-            setting to True. Note that this is a global setting. It is
-            recommended you do not leave this setting enabled for normal web
-            browsing.
+            For instructions on how you resolve this issue, please see the{" "}
+            <a href="/instructions/websockets">WebSockets Instructions</a> page.
           </div>
         )}
 
