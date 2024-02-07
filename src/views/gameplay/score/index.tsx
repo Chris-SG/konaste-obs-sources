@@ -48,6 +48,7 @@ const Score = () => {
   };
 
   if (konasteApi === undefined || stats === undefined) {
+    // return <ScoreView score={0} ex={0} rate={"0"} />
     return <></>;
   }
 
@@ -55,6 +56,7 @@ const Score = () => {
     <ScoreView
       score={stats.score}
       ex={stats.ex}
+      missedEx={stats.missedEx}
       rate={
         stats.ex === 0 && stats.missedEx === 0
           ? "100.00"
