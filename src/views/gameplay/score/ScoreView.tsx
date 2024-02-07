@@ -9,7 +9,7 @@ type ScoreViewProps = {
   rate: string;
 };
 
-const ScoreView = ({ score, ex, missedEx, rate }: ScoreViewProps) => {
+const ScoreView = ({ score, ex, rate }: ScoreViewProps) => {
   const { count, setStart, setEnd } = useCount({ duration: 1500 });
   const {
     count: exCount,
@@ -40,12 +40,6 @@ const ScoreView = ({ score, ex, missedEx, rate }: ScoreViewProps) => {
     if (score < 9800000) return "AAA";
     if (score < 9900000) return "AAA+";
     return "S";
-  };
-
-  const GetMark = () => {
-    if (rate === "100.00") return "SPUC";
-    if (missedEx === 0) return "UC";
-    return "CLEAR";
   };
 
   return (

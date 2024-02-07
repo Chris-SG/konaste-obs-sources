@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import NowPlayingView from "./NowPlayingView.tsx";
 
 interface NowPlayingProps {
   includeArcadeStats: boolean;
@@ -30,12 +31,33 @@ const NowPlaying = ({ includeArcadeStats }: NowPlayingProps) => {
         setNowPlayingStats(response.data);
       })
       .catch(() => setNowPlayingStats(undefined));
-  }, []);
+  }, [konasteHost]);
 
   if (nowPlayingStats === undefined) {
     return <></>;
   }
-  return <></>;
+  return (
+    <NowPlayingView
+      songName={nowPlayingStats.title}
+      artist={nowPlayingStats.artist}
+      bestScore={
+        includeArcadeStats
+          ? Math.max(
+              nowPlayingStats.personalBest,
+              nowPlayingStats.personalBestArcade,
+            )
+          : nowPlayingStats.personalBest
+      }
+      bestEx={
+        includeArcadeStats
+          ? Math.max(
+              nowPlayingStats.personalBestEx,
+              nowPlayingStats.personalBestExArcade,
+            )
+          : nowPlayingStats.personalBestEx
+      }
+    />
+  );
 };
 
 export default NowPlaying;

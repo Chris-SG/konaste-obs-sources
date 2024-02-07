@@ -50,6 +50,12 @@ const Home = () => {
           </div>
         </div>
         <h2>Endpoints</h2>
+        <div className="description">
+          All data-providing endpoints include a corresponding test endpoint
+          intended to help you verify the display in OBS. To use these
+          endpoints, simply prepend "/test". For example, "/test/gameplay/score"
+          will provide a simulated score page display.
+        </div>
         <div className="endpoint">
           <a href="/config">/config</a>
         </div>
