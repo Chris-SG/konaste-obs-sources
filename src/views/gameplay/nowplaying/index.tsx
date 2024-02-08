@@ -25,6 +25,10 @@ const NowPlaying = ({ includeArcadeStats }: NowPlayingProps) => {
   >(undefined);
 
   useEffect(() => {
+    document.documentElement.classList.add("transparent");
+  }, []);
+
+  useEffect(() => {
     fetch(`http://${konasteHost}/game/nowplaying`)
       .then((response) => response.json() as Promise<{ data: NowPlayingStats }>)
       .then((response) => {

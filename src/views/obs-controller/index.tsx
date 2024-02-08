@@ -71,6 +71,10 @@ const ObsController = () => {
   };
 
   useEffect(() => {
+    document.documentElement.classList.add("transparent");
+  }, []);
+
+  useEffect(() => {
     openKonasteApiConnection();
     openObsConnection();
     // eslint-disable-next-line react-hooks/exhaustive-deps

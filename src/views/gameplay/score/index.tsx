@@ -27,6 +27,10 @@ const Score = () => {
   };
 
   useEffect(() => {
+    document.documentElement.classList.add("transparent");
+  }, []);
+
+  useEffect(() => {
     openKonasteApiConnection();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

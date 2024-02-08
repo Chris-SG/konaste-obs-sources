@@ -20,10 +20,42 @@ div {
   font-variant: tabular-nums;
 }
 
-#score.D {
+.grade-D {
   color: #888888;
 }
 
-#score.S {
+.grade-C {
+  color: #888888;
+}
+
+.grade-B {
+  color: #888888;
+}
+
+.grade-A {
+  color: gold;
+}
+
+.grade-A\+ {
+  color: gold;
+}
+
+.grade-AA {
+  color: gold;
+}
+
+.grade-AA\+ {
+  color: gold;
+}
+
+.grade-AAA {
+  color: gold;
+}
+
+.grade-AAA\+ {
+  color: gold;
+}
+
+.grade-S {
   color: gold;
 }

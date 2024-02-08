@@ -1,0 +1,33 @@
+.song-name::before {
+}
+
+.artist::before {
+}
+
+.song-name {
+  font-size: 3.2em;
+  line-height: 1em;
+}
+
+.artist {
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 1.8em;
+}
+
+.score-title {
+  text-align: left;
+  font-size: 1.6em;
+  /*text-decoration: #535bf2;*/
+  text-decoration-line: underline;
+}
+
+.score-selection {
+  display: flex;
+}
+
+.score {
+}
+
+.ex::after {
+  content: "ex";
+}
