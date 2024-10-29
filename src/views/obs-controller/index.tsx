@@ -1,74 +1,69 @@
-import OBSWebSocket, {
-  OBSWebSocketError,
-  OBSRequestTypes,
-} from "obs-websocket-js";
 import { useEffect, useState } from "react";
+
+import OBSWebSocket, {
+  OBSRequestTypes,
+  OBSWebSocketError,
+} from "obs-websocket-js";
+
 import { SceneTransition } from "../config";
 
 const ObsController = () => {
-  const obsIp = localStorage.getItem("obs-ip") || "localhost";
-  const obsPort = localStorage.getItem("obs-port") || "4455";
-  const obsPassword = localStorage.getItem("obs-password") || undefined;
+  const obsIp = localStorage.getItem("obs-ip") || "localhost",
+    obsPort = localStorage.getItem("obs-port") || "4455",
+    obsPassword = localStorage.getItem("obs-password") || undefined,
+    sceneTransitions: Array<SceneTransition> = JSON.parse(
+      localStorage.getItem("obs-scene-transitions") || "[]",
+    ),
+    konasteHost = localStorage.getItem("api-host")!,
+    [errors, setErrors] = useState<Array<string>>(Array.of()),
+    [obsIsConnected, setObsIsConnected] = useState(false),
+    [obsIsConnecting, setObsIsConnecting] = useState(false),
+    [currentUI, setCurrentUI] = useState(""),
+    [obs] = useState(new OBSWebSocket()),
+    [konasteApi, setKonasteApi] = useState<WebSocket>(),
+    [retryConnectionIn, setRetryConnectionIn] = useState(3000),
+    messageEventListener = async (event: MessageEvent<string>) => {
+      console.log(event.data);
+      if (event.data === currentUI) {
+        return;
+      }
+      if (!obsIsConnected) {
+        return;
+      }
+      const transition = sceneTransitions.find((t) => t.UIEvent === event.data);
+      if (transition !== undefined && transition.UIEvent !== currentUI) {
+        console.log(
+          `UI changed from ${currentUI} to ${transition.UIEvent} - changing scene to ${transition.SceneName}`,
+        );
+        const request: OBSRequestTypes["SetCurrentProgramScene"] = {
+          sceneName: transition.SceneName,
+        };
+        await obs.call("SetCurrentProgramScene", request);
+        setCurrentUI(event.data);
+      }
+    },
+    openKonasteApiConnection = () => {
+      console.log("Opening konaste-api WebSocket");
+      const konasteWebsocket = new WebSocket(`ws://${konasteHost}:4573/ws/ui`);
 
-  const sceneTransitions: Array<SceneTransition> = JSON.parse(
-    localStorage.getItem("obs-scene-transitions") || "[]",
-  );
-
-  const konasteHost = localStorage.getItem("api-host")!;
-
-  const [errors, setErrors] = useState<Array<string>>(Array.of());
-  const [obsIsConnected, setObsIsConnected] = useState(false);
-  const [obsIsConnecting, setObsIsConnecting] = useState(false);
-  const [currentUI, setCurrentUI] = useState("");
-  const [obs] = useState(new OBSWebSocket());
-  const [konasteApi, setKonasteApi] = useState<WebSocket>();
-
-  const [retryConnectionIn, setRetryConnectionIn] = useState(3000);
-
-  const messageEventListener = async (event: MessageEvent<string>) => {
-    console.log(event.data);
-    if (event.data === currentUI) {
-      return;
-    }
-    if (!obsIsConnected) {
-      return;
-    }
-    const transition = sceneTransitions.find((t) => t.UIEvent === event.data);
-    if (transition !== undefined && transition.UIEvent !== currentUI) {
-      console.log(
-        `UI changed from ${currentUI} to ${transition.UIEvent} - changing scene to ${transition.SceneName}`,
-      );
-      const request: OBSRequestTypes["SetCurrentProgramScene"] = {
-        sceneName: transition.SceneName,
-      };
-      await obs.call("SetCurrentProgramScene", request);
-      setCurrentUI(event.data);
-    }
-  };
-
-  const openKonasteApiConnection = () => {
-    console.log("Opening konaste-api WebSocket");
-    const konasteWebsocket = new WebSocket(`ws://${konasteHost}:4573/ws/ui`);
-
-    setKonasteApi(konasteWebsocket);
-  };
-
-  const openObsConnection = async () => {
-    if (obsIsConnecting || obsIsConnected) return;
-    setObsIsConnecting(true);
-    try {
-      console.log("Opening OBS WebSocket");
-      await obs.connect(`ws://${obsIp}:${obsPort}`, obsPassword);
-      setObsIsConnected(true);
-      setObsIsConnecting(false);
-    } catch (e) {
-      setRetryConnectionIn(3000);
-      setErrors(
-        errors.concat(`Failed to open OBS WebSocket: ${JSON.stringify(e)}`),
-      );
-      setObsIsConnecting(false);
-    }
-  };
+      setKonasteApi(konasteWebsocket);
+    },
+    openObsConnection = async () => {
+      if (obsIsConnecting || obsIsConnected) return;
+      setObsIsConnecting(true);
+      try {
+        console.log("Opening OBS WebSocket");
+        await obs.connect(`ws://${obsIp}:${obsPort}`, obsPassword);
+        setObsIsConnected(true);
+        setObsIsConnecting(false);
+      } catch (e) {
+        setRetryConnectionIn(3000);
+        setErrors(
+          errors.concat(`Failed to open OBS WebSocket: ${JSON.stringify(e)}`),
+        );
+        setObsIsConnecting(false);
+      }
+    };
 
   useEffect(() => {
     document.documentElement.classList.add("transparent");

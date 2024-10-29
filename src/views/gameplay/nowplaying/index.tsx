@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import NowPlayingView from "./NowPlayingView.tsx";
 
 interface NowPlayingProps {
@@ -19,10 +20,10 @@ interface NowPlayingStats {
 }
 
 const NowPlaying = ({ includeArcadeStats }: NowPlayingProps) => {
-  const konasteHost = localStorage.getItem("api-host")!;
-  const [nowPlayingStats, setNowPlayingStats] = useState<
-    NowPlayingStats | undefined
-  >(undefined);
+  const konasteHost = localStorage.getItem("api-host")!,
+    [nowPlayingStats, setNowPlayingStats] = useState<
+      NowPlayingStats | undefined
+    >(undefined);
 
   useEffect(() => {
     document.documentElement.classList.add("transparent");

@@ -1,11 +1,13 @@
 import { Route } from "wouter";
+
 import Config from "./views/config";
-import ObsController from "./views/obs-controller";
-import Home from "./views/home";
-import Score from "./views/gameplay/score";
-import Websockets from "./views/instructions/websockets";
-import NowPlayingTestView from "./views/tests/NowPlayingTestView.tsx";
 import NowPlaying from "./views/gameplay/nowplaying";
+import Score from "./views/gameplay/score";
+import Home from "./views/home";
+import Websockets from "./views/instructions/websockets";
+import ObsController from "./views/obs-controller";
+import NowPlayingTestView from "./views/tests/NowPlayingTestView.tsx";
+import ScoreTestView from "./views/tests/ScoreTestView.tsx";
 
 function App() {
   return (
@@ -36,6 +38,9 @@ function App() {
         <Route path="/gameplay" nest>
           <Route path="/nowplaying">
             <NowPlayingTestView />
+          </Route>
+          <Route path="/score">
+            <ScoreTestView />
           </Route>
         </Route>
       </Route>

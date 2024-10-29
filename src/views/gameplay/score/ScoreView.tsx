@@ -1,6 +1,7 @@
 import "./score.css";
-import useCount from "../../../hooks/CountHook.tsx";
 import { useEffect } from "react";
+
+import useCount from "../../../hooks/CountHook.tsx";
 import { GetGrade } from "../../../utils/scoreConverter.ts";
 
 type ScoreViewProps = {
@@ -11,12 +12,12 @@ type ScoreViewProps = {
 };
 
 const ScoreView = ({ score, ex, rate }: ScoreViewProps) => {
-  const { count, setStart, setEnd } = useCount({ duration: 1500 });
-  const {
-    count: exCount,
-    setStart: setExStart,
-    setEnd: setExEnd,
-  } = useCount({ duration: 1500 });
+  const { count, setStart, setEnd } = useCount({ duration: 1500 }),
+    {
+      count: exCount,
+      setStart: setExStart,
+      setEnd: setExEnd,
+    } = useCount({ duration: 1500 });
 
   useEffect(() => {
     setStart(count);
@@ -34,7 +35,7 @@ const ScoreView = ({ score, ex, rate }: ScoreViewProps) => {
     <>
       <div id="score-view">
         <div id="score" className={`grade-${GetGrade(count)}`}>
-          {("00000000" + count).slice(-8)}
+          {`00000000${count}`.slice(-8)}
         </div>
         <div id="ex" className={`grade-${GetGrade(count)}`}>
           {exCount}

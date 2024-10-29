@@ -1,0 +1,94 @@
+
+#difficulty-number {
+    fill: white;
+    font-size: 48px;
+    font-family: "CommadorExtended", sans-serif;
+    text-Anchor: middle;
+}
+
+text {
+    font-size: 14px;
+    font-family: "CommadorExtended", sans-serif;
+    filter: url(#subtle-white-outline);
+    &.novice {
+        fill: #4d0093;
+    }
+    &.advanced {
+        fill: #ffaf1f;
+    }
+    &.exhaust {
+        fill: #AB2020;
+    }
+    &.maximum {
+
+    }
+    &.infinite {
+
+    }
+    &.greater {
+
+    }
+    &.heavenly {
+
+    }
+    &.vivid {
+
+    }
+    &.exceed {
+
+    }
+}
+
+div.novice {
+    --colour-stroke-1: #4d0093;
+    --colour-stroke-2: #4d0093;
+    --colour-stroke-3: #5f2c8f;
+}
+
+div.advanced {
+    --colour-stroke-1: #ffaf1f;
+    --colour-stroke-2: #ffaf1f;
+    --colour-stroke-3: #ffbf51;
+}
+
+div.exhaust {
+    --colour-stroke-1: #AB0000;
+    --colour-stroke-2: #AB2020;
+    --colour-stroke-3: #AB4040;
+}
+
+div.maximum {
+    --colour-stroke-1: #AB0000;
+    --colour-stroke-2: #AB2020;
+    --colour-stroke-3: #AB4040;
+}
+
+div.infinite {
+    --colour-stroke-1: #AB0000;
+    --colour-stroke-2: #AB2020;
+    --colour-stroke-3: #AB4040;
+}
+
+div.gravity {
+    --colour-stroke-1: #AB0000;
+    --colour-stroke-2: #AB2020;
+    --colour-stroke-3: #AB4040;
+}
+
+div.heavenly {
+    --colour-stroke-1: #AB0000;
+    --colour-stroke-2: #AB2020;
+    --colour-stroke-3: #AB4040;
+}
+
+div.vivid {
+    --colour-stroke-1: #AB0000;
+    --colour-stroke-2: #AB2020;
+    --colour-stroke-3: #AB4040;
+}
+
+div.exceed {
+    --colour-stroke-1: #AB0000;
+    --colour-stroke-2: #AB2020;
+    --colour-stroke-3: #AB4040;
+}

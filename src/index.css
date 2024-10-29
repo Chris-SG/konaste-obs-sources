@@ -23,3 +23,9 @@
   padding: 2rem;
   text-align: center;
 }
+
+@font-face{
+  font-family: "CommadorExtended";
+  src:local("Commador Extended Normal"),
+  url('./assets/fonts/commador_extended_normal.ttf')
+}

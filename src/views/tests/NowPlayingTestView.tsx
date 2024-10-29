@@ -1,5 +1,6 @@
-import NowPlayingView from "../gameplay/nowplaying/NowPlayingView.tsx";
 import { useEffect } from "react";
+
+import NowPlayingView from "../gameplay/nowplaying/NowPlayingView.tsx";
 
 const NowPlayingTestView = () => {
   useEffect(() => {

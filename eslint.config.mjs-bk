@@ -1,0 +1,75 @@
+import { fixupConfigRules } from "@eslint/compat";
+import reactRefresh from "eslint-plugin-react-refresh";
+import globals from "globals";
+import tsParser from "@typescript-eslint/parser";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import js from "@eslint/js";
+import { FlatCompat } from "@eslint/eslintrc";
+import eslintConfigPrettier from "eslint-config-prettier";
+import prettierPlugin from "eslint-plugin-prettier";
+import importPlugin from "eslint-plugin-import"; // Import the ESLint import plugin
+import jestPlugin from "eslint-plugin-jest"
+
+const __filename = fileURLToPath(import.meta.url),
+    __dirname = path.dirname(__filename),
+    compat = new FlatCompat({
+        baseDirectory: __dirname,
+        recommendedConfig: js.configs.recommended,
+        allConfig: js.configs.all,
+    });
+
+export default [{
+    ignores: ["**/dist", "eslint.config.mjs", "**/*.test.tsx"],
+},
+    ...fixupConfigRules([
+        js.configs.recommended,
+        js.configs.all,
+        eslintConfigPrettier, // Spread Prettier configuration
+        {
+            files: ["**/*.ts", "**/*.tsx"],
+            plugins: {
+                "react-refresh": reactRefresh,
+                prettier: prettierPlugin, // Prettier plugin
+                "import": importPlugin,  // ESLint import plugin
+            },
+            languageOptions: {
+                globals: {
+                    ...globals.browser,
+                },
+                parser: tsParser,
+            },
+            rules: {
+                "one-var": ["error", "never"],
+                "prettier/prettier": "error", // Prettier formatting issues as errors
+                "react-refresh/only-export-components": ["warn", {
+                    allowConstantExport: true,
+                }],
+                "sort-imports": "off",
+                "no-magic-numbers": "off",
+                "no-console": "warn",
+                // Add import/order rule to sort and group imports
+                "import/order": ["error", {
+                    "groups": [["builtin", "external", "internal"]],
+                    "pathGroups": [
+                        {
+                            "pattern": "react",
+                            "group": "external",
+                            "position": "before"
+                        }
+                    ],
+                    "pathGroupsExcludedImportTypes": ["builtin"],
+                    "alphabetize": { "order": "asc", "caseInsensitive": true },
+                    "newlines-between": "always"
+                }],
+                "no-unused-vars": [
+                    "error",
+                    {
+                        "argsIgnorePattern": "^_",   // Ignore unused parameters that start with an underscore
+                        "varsIgnorePattern": "^_"    // Ignore unused variables that start with an underscore
+                    }
+                ],
+            },
+        }
+    ])
+];

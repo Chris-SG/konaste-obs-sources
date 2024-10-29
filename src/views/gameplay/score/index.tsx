@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import ScoreView from "./ScoreView.tsx";
 
 interface Stats {
@@ -13,18 +14,17 @@ interface Stats {
 }
 
 const Score = () => {
-  const konasteHost = localStorage.getItem("api-host")!;
-  const [konasteApi, setKonasteApi] = useState<WebSocket>();
-  const [stats, setStats] = useState<Stats | undefined>(undefined);
-
-  const messageEventListener = async (event: MessageEvent<string>) => {
-    console.log(event.data);
-    if (event.data === "null") {
-      setStats(undefined);
-      return;
-    }
-    setStats(JSON.parse(event.data));
-  };
+  const konasteHost = localStorage.getItem("api-host")!,
+    [konasteApi, setKonasteApi] = useState<WebSocket>(),
+    [stats, setStats] = useState<Stats | undefined>(undefined),
+    messageEventListener = async (event: MessageEvent<string>) => {
+      console.log(event.data);
+      if (event.data === "null") {
+        setStats(undefined);
+        return;
+      }
+      setStats(JSON.parse(event.data));
+    };
 
   useEffect(() => {
     document.documentElement.classList.add("transparent");
@@ -32,7 +32,6 @@ const Score = () => {
 
   useEffect(() => {
     openKonasteApiConnection();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -52,7 +51,7 @@ const Score = () => {
   };
 
   if (konasteApi === undefined || stats === undefined) {
-    // return <ScoreView score={0} ex={0} rate={"0"} />
+    // Return <ScoreView score={0} ex={0} rate={"0"} />
     return <></>;
   }
 
