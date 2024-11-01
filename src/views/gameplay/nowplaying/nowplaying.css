@@ -1,3 +1,11 @@
+div {
+  font-family: "CommadorExtended", sans-serif;
+}
+
+div.now-playing {
+  display: flex;
+}
+
 .song-name::before {
 }
 

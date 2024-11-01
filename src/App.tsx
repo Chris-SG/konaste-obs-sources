@@ -26,7 +26,7 @@ function App() {
           <Score />
         </Route>
         <Route path="/nowplaying">
-          <NowPlaying includeArcadeStats={true} />
+          <NowPlaying />
         </Route>
       </Route>
       <Route path="/instructions" nest>

@@ -11,8 +11,10 @@ const NowPlayingTestView = () => {
     <NowPlayingView
       songName="Song Title Here"
       artist="Song Artist Here"
-      bestEx={3540}
-      bestScore={9889455}
+      level={17}
+      difficulty={"maximum"}
+      imageUrl={"/"}
+      infiniteVersion={0}
     />
   );
 };

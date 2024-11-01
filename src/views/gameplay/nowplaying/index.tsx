@@ -2,24 +2,23 @@ import { useEffect, useState } from "react";
 
 import NowPlayingView from "./NowPlayingView.tsx";
 
-interface NowPlayingProps {
-  includeArcadeStats: boolean;
-}
-
 interface NowPlayingStats {
   songId: number;
   title: string;
   artist: string;
-  difficulty: number;
-  personalBest: number;
-  personalBestArcade: number;
-  personalBestEx: number;
-  personalBestExArcade: number;
-  clearType: number;
-  arcadeClearType: number;
+  difficulty: string;
+  infiniteVersion: number;
+  level: number;
+  notes: number;
+  peak: number;
+  tsumami: number;
+  tricky: number;
+  handTrip: number;
+  oneHand: number;
+  imageFile: string;
 }
 
-const NowPlaying = ({ includeArcadeStats }: NowPlayingProps) => {
+const NowPlaying = () => {
   const konasteHost = localStorage.getItem("api-host")!,
     [nowPlayingStats, setNowPlayingStats] = useState<
       NowPlayingStats | undefined
@@ -31,9 +30,9 @@ const NowPlaying = ({ includeArcadeStats }: NowPlayingProps) => {
 
   useEffect(() => {
     fetch(`http://${konasteHost}/game/nowplaying`)
-      .then((response) => response.json() as Promise<{ data: NowPlayingStats }>)
+      .then((response) => response.json() as Promise<NowPlayingStats>)
       .then((response) => {
-        setNowPlayingStats(response.data);
+        setNowPlayingStats(response);
       })
       .catch(() => setNowPlayingStats(undefined));
   }, [konasteHost]);
@@ -45,22 +44,10 @@ const NowPlaying = ({ includeArcadeStats }: NowPlayingProps) => {
     <NowPlayingView
       songName={nowPlayingStats.title}
       artist={nowPlayingStats.artist}
-      bestScore={
-        includeArcadeStats
-          ? Math.max(
-              nowPlayingStats.personalBest,
-              nowPlayingStats.personalBestArcade,
-            )
-          : nowPlayingStats.personalBest
-      }
-      bestEx={
-        includeArcadeStats
-          ? Math.max(
-              nowPlayingStats.personalBestEx,
-              nowPlayingStats.personalBestExArcade,
-            )
-          : nowPlayingStats.personalBestEx
-      }
+      difficulty={nowPlayingStats.difficulty}
+      infiniteVersion={nowPlayingStats.infiniteVersion}
+      level={nowPlayingStats.level}
+      imageUrl={`http://${konasteHost}/game/files?filename=${nowPlayingStats.imageFile}`}
     />
   );
 };

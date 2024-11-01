@@ -1,3 +1,6 @@
+.difficulty {
+    display: flex;
+}
 
 #difficulty-number {
     fill: white;
@@ -20,19 +23,19 @@ text {
         fill: #AB2020;
     }
     &.maximum {
-
+        fill: #999999;
     }
     &.infinite {
-
+        fill: #b116c3;
     }
-    &.greater {
-
+    &.gravity {
+        fill: #c87c17;
     }
     &.heavenly {
-
+        fill: #1676aa;
     }
     &.vivid {
-
+        fill: #cf15cc;
     }
     &.exceed {
 
@@ -58,33 +61,33 @@ div.exhaust {
 }
 
 div.maximum {
-    --colour-stroke-1: #AB0000;
-    --colour-stroke-2: #AB2020;
-    --colour-stroke-3: #AB4040;
+    --colour-stroke-1: #777777;
+    --colour-stroke-2: #999999;
+    --colour-stroke-3: #AAAAAA;
 }
 
 div.infinite {
-    --colour-stroke-1: #AB0000;
-    --colour-stroke-2: #AB2020;
-    --colour-stroke-3: #AB4040;
+    --colour-stroke-1: #9a00ab;
+    --colour-stroke-2: #b116c3;
+    --colour-stroke-3: #a028ae;
 }
 
 div.gravity {
-    --colour-stroke-1: #AB0000;
-    --colour-stroke-2: #AB2020;
-    --colour-stroke-3: #AB4040;
+    --colour-stroke-1: #c67100;
+    --colour-stroke-2: #c87c17;
+    --colour-stroke-3: #c58338;
 }
 
 div.heavenly {
-    --colour-stroke-1: #AB0000;
-    --colour-stroke-2: #AB2020;
-    --colour-stroke-3: #AB4040;
+    --colour-stroke-1: #006fab;
+    --colour-stroke-2: #1676aa;
+    --colour-stroke-3: #2e7da8;
 }
 
 div.vivid {
-    --colour-stroke-1: #AB0000;
-    --colour-stroke-2: #AB2020;
-    --colour-stroke-3: #AB4040;
+    --colour-stroke-1: #ab00a8;
+    --colour-stroke-2: #cf15cc;
+    --colour-stroke-3: #aa26a8;
 }
 
 div.exceed {
