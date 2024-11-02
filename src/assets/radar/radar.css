@@ -1,0 +1,62 @@
+svg {
+    word-spacing: 1px;
+}
+
+svg.radar {
+
+    animation: breath linear 2s infinite;
+    --colour-stroke-1: var(--colour-stroke-1-breath);
+    --colour-stroke-2: var(--colour-stroke-2-breath);
+}
+
+@keyframes breath {
+    /*0% {*/
+    /*    --colour-stroke-1-breath: #71acff;*/
+    /*    --colour-stroke-2-breath: #e81a4f;*/
+    /*}*/
+    50% {
+        --colour-stroke-1-breath: #3a5983;
+        --colour-stroke-2-breath: #88102f;
+    }
+}
+
+@property --colour-stroke-1-breath {
+    syntax: "<color>";
+    initial-value: #71acff;
+    inherits: false;
+}
+@property --colour-stroke-2-breath {
+    syntax: "<color>";
+    initial-value: #e81a4f;
+    inherits: false;
+}
+
+.radarcontainer text {
+    font-family: "ContinuumMedium", sans-serif;
+    transform-origin: 50% 50%;
+    text-anchor: middle;
+    text-align: center;
+    dominant-baseline: middle;
+    font-size: 10px;
+    stroke: black;
+    stroke-width: 0.5px;
+
+    &.notes {
+        fill: cyan;
+    }
+    &.peak {
+        fill: red;
+    }
+    &.tsumami {
+        fill: deeppink;
+    }
+    &.tricky {
+        fill: yellow;
+    }
+    &.handtrip {
+        fill: mediumpurple;
+    }
+    &.onehand {
+        fill: limegreen;
+    }
+}

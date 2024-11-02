@@ -1,13 +1,7 @@
 import "./home.css";
-import Difficulty, { DifficultyOption } from "../../assets/difficulty";
 
 const Home = () => (
   <>
-    <div>
-      <Difficulty difficulty={DifficultyOption.NOVICE} level={4} />
-      <Difficulty difficulty={DifficultyOption.ADVANCED} level={13} />
-      <Difficulty difficulty={DifficultyOption.EXHAUST} level={20} />
-    </div>
     <div className="center">
       {location.protocol.startsWith("https") && (
         <div className="warning">

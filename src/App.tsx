@@ -8,6 +8,7 @@ import Websockets from "./views/instructions/websockets";
 import ObsController from "./views/obs-controller";
 import NowPlayingTestView from "./views/tests/NowPlayingTestView.tsx";
 import ScoreTestView from "./views/tests/ScoreTestView.tsx";
+import CurrentRadar from "./views/gameplay/currentradar";
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
         </Route>
         <Route path="/nowplaying">
           <NowPlaying />
+        </Route>
+        <Route path="/nowplaying/radar">
+          <CurrentRadar />
         </Route>
       </Route>
       <Route path="/instructions" nest>

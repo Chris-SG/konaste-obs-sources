@@ -29,3 +29,9 @@
   src:local("Commador Extended Normal"),
   url('./assets/fonts/commador_extended_normal.ttf')
 }
+
+@font-face{
+  font-family: "ContinuumMedium";
+  src:local("Continuum Medium"),
+  url('./assets/fonts/contm.ttf');
+}
