@@ -53,8 +53,8 @@ const Home = () => (
       <div className="description">
         All data-providing endpoints include a corresponding test endpoint
         intended to help you verify the display in OBS. To use these endpoints,
-        simply prepend "/test". For example, "/test/gameplay/score" will provide
-        a simulated score page display.
+        simply prepend "/test". For example, "/test/gameplay/nowplaying/radar"
+        will provide a simulated radar page.
       </div>
       <div className="endpoint">
         <a href="/config">/config</a>
@@ -72,6 +72,26 @@ const Home = () => (
         display based on in-game UI. For this, you must enable websockets in OBS
         (<b>Tools -&gt; WebSocket Server Settings</b>) and configure OBS
         settings in <a href="/config">/config</a>.
+      </div>
+      <div className="endpoint">
+        <a href="/gameplay/nowplaying/song">/gameplay/nowplaying/song</a>
+      </div>
+      <div className="description">
+        If actively playing a song, will return the current song name and
+        artist.
+      </div>
+      <div className="endpoint">
+        <a href="/gameplay/nowplaying/jacket">/gameplay/nowplaying/jacket</a>
+      </div>
+      <div className="description">
+        If actively playing a song, will return the jacket. Pass the `size`
+        query parameter, `small`, `normal` or `big` to control the jacket size.
+      </div>
+      <div className="endpoint">
+        <a href="/gameplay/nowplaying/radar">/gameplay/nowplaying/radar</a>
+      </div>
+      <div className="description">
+        If actively playing a song, will return a radar for the song.
       </div>
       <div className="endpoint">
         <a href="/gameplay/score">/gameplay/score</a>

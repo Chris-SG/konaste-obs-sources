@@ -1,8 +1,5 @@
-div {
+div.now-playing-song {
   font-family: "CommadorExtended", sans-serif;
-}
-
-div.now-playing {
   display: flex;
 }
 
@@ -36,6 +33,3 @@ div.now-playing {
 .score {
 }
 
-.ex::after {
-  content: "ex";
-}

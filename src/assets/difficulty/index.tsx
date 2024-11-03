@@ -70,10 +70,6 @@ const Difficulty = ({
             </filter>
           </defs>
           <Hexagon id={DifficultyOption[difficulty].toLowerCase()} />
-          {/*<Hexagon*/}
-          {/*  difficulty={DifficultyOption[difficulty].toLowerCase()}*/}
-          {/*  id={DifficultyOption[difficulty].toLowerCase()}*/}
-          {/*/>*/}
           <text id="difficulty-number" x="50" y="58" viewBox="0 0 100 100">
             {level}
           </text>
@@ -88,9 +84,6 @@ const Difficulty = ({
           </text>
         </svg>
       </div>
-      {/*<div className="exhaust">*/}
-      {/*  <Hexagon />*/}
-      {/*</div>*/}
     </>
   );
 };

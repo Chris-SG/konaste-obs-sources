@@ -1,5 +1,5 @@
-import "./nowplaying.css";
-import Difficulty from "../../../assets/difficulty";
+import "./nowplayingsong.css";
+import Difficulty from "../../../../assets/difficulty";
 
 interface NowPlayingViewProps {
   songName: string;
@@ -7,7 +7,6 @@ interface NowPlayingViewProps {
   level: number;
   difficulty: string;
   infiniteVersion: number;
-  imageUrl: string;
 }
 
 const DifficultyToNumerical: { [index: string]: number } = {
@@ -18,13 +17,12 @@ const DifficultyToNumerical: { [index: string]: number } = {
   infinite: 4,
 };
 
-const NowPlayingView = ({
+const NowPlayingSongView = ({
   songName,
   artist,
   level,
   difficulty,
   infiniteVersion,
-  imageUrl,
 }: NowPlayingViewProps) => {
   const difficultyLevel = Math.max(
     DifficultyToNumerical[difficulty],
@@ -32,16 +30,15 @@ const NowPlayingView = ({
   );
   return (
     <>
-      <div className="now-playing">
+      <div className="now-playing-song">
         <Difficulty difficulty={difficultyLevel} level={level} />
         <div>
           <div className="song-name">{songName}</div>
           <div className="artist">{artist}</div>
         </div>
       </div>
-      <img src={imageUrl} alt="" />
     </>
   );
 };
 
-export default NowPlayingView;
+export default NowPlayingSongView;

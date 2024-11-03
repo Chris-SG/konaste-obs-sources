@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import Radar from "../../../assets/radar";
+import Radar from "../../../../assets/radar";
+import { getNowPlayingSong } from "../../../../clients/KonasteApiClient.ts";
 
 interface RadarData {
   notes: number;
@@ -10,22 +11,16 @@ interface RadarData {
   oneHand: number;
 }
 
-const CurrentRadar = () => {
-  const konasteHost = localStorage.getItem("api-host")!,
-    [radar, setRadar] = useState<RadarData | undefined>(undefined);
+const NowPlayingRadar = () => {
+  const [radar, setRadar] = useState<RadarData | undefined>(undefined);
 
   useEffect(() => {
     document.documentElement.classList.add("transparent");
   }, []);
 
   useEffect(() => {
-    fetch(`http://${konasteHost}/game/nowplaying`)
-      .then((response) => response.json() as Promise<RadarData>)
-      .then((response) => {
-        setRadar(response);
-      })
-      .catch(() => setRadar(undefined));
-  }, [konasteHost]);
+    getNowPlayingSong().then(setRadar);
+  }, []);
 
   if (radar === undefined) {
     return <></>;
@@ -43,4 +38,4 @@ const CurrentRadar = () => {
   );
 };
 
-export default CurrentRadar;
+export default NowPlayingRadar;

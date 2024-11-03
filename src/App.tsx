@@ -1,14 +1,16 @@
 import { Route } from "wouter";
 
 import Config from "./views/config";
-import NowPlaying from "./views/gameplay/nowplaying";
+import NowPlayingSong from "./views/gameplay/nowplaying/song";
 import Score from "./views/gameplay/score";
 import Home from "./views/home";
 import Websockets from "./views/instructions/websockets";
 import ObsController from "./views/obs-controller";
-import NowPlayingTestView from "./views/tests/NowPlayingTestView.tsx";
 import ScoreTestView from "./views/tests/ScoreTestView.tsx";
-import CurrentRadar from "./views/gameplay/currentradar";
+import NowPlayingRadar from "./views/gameplay/nowplaying/radar";
+import NowPlayingSongView from "./views/gameplay/nowplaying/song/NowPlayingSongView.tsx";
+import NowPlayingJacket from "./views/gameplay/nowplaying/jacket";
+import Radar from "./assets/radar";
 
 function App() {
   return (
@@ -26,11 +28,16 @@ function App() {
         <Route path="/score">
           <Score />
         </Route>
-        <Route path="/nowplaying">
-          <NowPlaying />
-        </Route>
-        <Route path="/nowplaying/radar">
-          <CurrentRadar />
+        <Route path="/nowplaying" nest>
+          <Route path="/song">
+            <NowPlayingSong />
+          </Route>
+          <Route path="/jacket">
+            <NowPlayingJacket />
+          </Route>
+          <Route path="/radar">
+            <NowPlayingRadar />
+          </Route>
         </Route>
       </Route>
       <Route path="/instructions" nest>
@@ -40,8 +47,26 @@ function App() {
       </Route>
       <Route path="/test" nest>
         <Route path="/gameplay" nest>
-          <Route path="/nowplaying">
-            <NowPlayingTestView />
+          <Route path="/nowplaying" nest>
+            <Route path="/song">
+              <NowPlayingSongView
+                songName="Song Name Here"
+                artist="Artist Name"
+                level={20}
+                difficulty="infinite"
+                infiniteVersion={2}
+              />
+            </Route>
+            <Route path="/radar">
+              <Radar
+                notes={Math.floor(Math.random() * 200)}
+                peak={Math.floor(Math.random() * 200)}
+                tsumami={Math.floor(Math.random() * 200)}
+                tricky={Math.floor(Math.random() * 200)}
+                handTrip={Math.floor(Math.random() * 200)}
+                oneHand={Math.floor(Math.random() * 200)}
+              />
+            </Route>
           </Route>
           <Route path="/score">
             <ScoreTestView />

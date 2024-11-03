@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import NowPlayingView from "../gameplay/nowplaying/NowPlayingView.tsx";
+import NowPlayingSongView from "../gameplay/nowplaying/song/NowPlayingSongView.tsx";
 
 const NowPlayingTestView = () => {
   useEffect(() => {
@@ -8,12 +8,11 @@ const NowPlayingTestView = () => {
   }, []);
 
   return (
-    <NowPlayingView
+    <NowPlayingSongView
       songName="Song Title Here"
       artist="Song Artist Here"
       level={17}
       difficulty={"maximum"}
-      imageUrl={"/"}
       infiniteVersion={0}
     />
   );
