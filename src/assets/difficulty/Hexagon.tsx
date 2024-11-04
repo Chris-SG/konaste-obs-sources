@@ -1,6 +1,12 @@
 const Hexagon = ({ id }: { id: string }) => {
   return (
-    <svg viewBox="0 0 119 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 119 104"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <g filter={`url(#filter0_d_0_1-${id})`}>
         <path
           d="M13.9201 48.3013L36.6107 9L81.9919 9L104.682 48.3013L81.9919 87.6025L36.6107 87.6025L13.9201 48.3013Z"

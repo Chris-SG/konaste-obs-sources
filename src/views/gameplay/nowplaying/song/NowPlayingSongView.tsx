@@ -1,5 +1,6 @@
 import "./nowplayingsong.css";
 import Difficulty from "../../../../assets/difficulty";
+import { DifficultyToNumerical } from "../../../../clients/KonasteModels.ts";
 
 interface NowPlayingViewProps {
   songName: string;
@@ -8,14 +9,6 @@ interface NowPlayingViewProps {
   difficulty: string;
   infiniteVersion: number;
 }
-
-const DifficultyToNumerical: { [index: string]: number } = {
-  novice: 0,
-  advanced: 1,
-  exhaust: 2,
-  maximum: 3,
-  infinite: 4,
-};
 
 const NowPlayingSongView = ({
   songName,

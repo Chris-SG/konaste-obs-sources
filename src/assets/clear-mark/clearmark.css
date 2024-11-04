@@ -2,56 +2,56 @@ svg {
     stroke: black;
     stroke-width: 1px;
 }
-div.played svg {
+svg.played svg {
     --letter-colour-1: #4d9761;
     --letter-colour-2: #769883;
 
 }
 
-div.comp svg {
+svg.comp svg {
     --letter-colour-1: #84fba5;
     --letter-colour-2: #c8fddc;
 
 }
 
-div.ex svg {
+svg.ex svg {
     --letter-colour-1: #cb53f7;
     --letter-colour-2: #e9bbfb;
 
 }
 
-div.uc svg {
+svg.uc svg {
     --letter-colour-1: #eb54a8;
     --letter-colour-2: #f5c0df;
 
 }
 
-div.puc svg {
+svg.puc svg {
     --letter-colour-1: #fefd69;
     --letter-colour-2: #fefebc;
 }
 
-div.played svg.clear-hexagon {
+svg.played svg.clear-hexagon {
     --mark-colour-stroke-1: #4b9560;
     --mark-colour-stroke-2: #3a754a;
 }
 
-div.comp svg.clear-hexagon {
+svg.comp svg.clear-hexagon {
     --mark-colour-stroke-1: #84fb9f;
     --mark-colour-stroke-2: #63c47d;
 }
 
-div.ex svg.clear-hexagon {
+svg.ex svg.clear-hexagon {
     --mark-colour-stroke-1: #c64af2;
     --mark-colour-stroke-2: #9d39c0;
 }
 
-div.uc svg.clear-hexagon {
+svg.uc svg.clear-hexagon {
     --mark-colour-stroke-1: #e850a3;
     --mark-colour-stroke-2: #b73e81;
 }
 
-div.puc svg.clear-hexagon {
+svg.puc svg.clear-hexagon {
     --mark-colour-stroke-1: #fbfa65;
     --mark-colour-stroke-2: #787729;
 }

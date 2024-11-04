@@ -11,6 +11,7 @@ import NowPlayingRadar from "./views/gameplay/nowplaying/radar";
 import NowPlayingSongView from "./views/gameplay/nowplaying/song/NowPlayingSongView.tsx";
 import NowPlayingJacket from "./views/gameplay/nowplaying/jacket";
 import Radar from "./assets/radar";
+import HistoryView from "./views/gameplay/history/HistoryView.tsx";
 
 function App() {
   return (
@@ -67,6 +68,44 @@ function App() {
                 oneHand={Math.floor(Math.random() * 200)}
               />
             </Route>
+          </Route>
+          <Route path="/history">
+            <HistoryView
+              history={Array.of(
+                {
+                  songName: "Test Song Name",
+                  artist: "My Artist",
+                  clearMark: "uc",
+                  score: 9987223,
+                  difficulty: "maximum",
+                  infiniteVersion: 0,
+                  level: 18,
+                  exScore: 7226,
+                  bestExScore: 7833,
+                  combo: 1722,
+                  bestScore: 9992322,
+                  maxEx: 8242,
+                  imagePath: "",
+                },
+                {
+                  songName: "Test Song Name",
+                  artist: "My Artist",
+                  clearMark: "uc",
+                  score: 9987223,
+                  difficulty: "maximum",
+                  infiniteVersion: 0,
+                  level: 18,
+                  exScore: 7226,
+                  bestExScore: 7833,
+                  combo: 1722,
+                  bestScore: 9992322,
+                  maxEx: 8022,
+                  imagePath: "",
+                },
+              )}
+              exForm={"under-perfect"}
+              scoreForm={"under-best"}
+            ></HistoryView>
           </Route>
           <Route path="/score">
             <ScoreTestView />

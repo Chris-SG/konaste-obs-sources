@@ -48,8 +48,8 @@ const ClearHexagon = ({ markType }: { markType: string }) => {
           y2="118.5"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="var(--mark-grey-gradient-1)" />
-          <stop stopColor="var(--mark-grey-gradient-2)" offset="1" />
+          <stop stopColor="var(--mark-grey-gradient-1)" offset="0.2" />
+          <stop stopColor="var(--mark-grey-gradient-2)" offset="0.8" />
         </linearGradient>
       </defs>
     </svg>
