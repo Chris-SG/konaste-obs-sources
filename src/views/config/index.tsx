@@ -49,6 +49,28 @@ const Config = () => {
           configurationId={"scene-transitions"}
           configurationName={"Scene Transitions"}
           registerSubmitCallback={registerSubmitCallback}
+          keyValueSource={() =>
+            Array.of(
+              "",
+              "UI_UNKNOWN",
+              "UI_BOOT",
+              "UI_LOAD_START",
+              "UI_END_OF_CREDIT",
+              "UI_HOME",
+              "UI_SPLASH",
+              "UI_RESULT",
+              "UI_SONG_SELECT",
+              "UI_AUTOPLAY",
+              "UI_DEMO",
+              "UI_START_CREDIT",
+              "UI_START_LOGIN",
+              "UI_LOGGED_IN",
+              "UI_MODE_SELECT",
+              "UI_SKILL_ANALYZER",
+              "UI_MY_ROOM",
+              "UI_SONG_PLAY",
+            )
+          }
         />
         <br />
         <StringConfigurationItem

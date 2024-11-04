@@ -4,6 +4,8 @@ interface MapConfigurationItemProps {
   configurationId: string;
   configurationName: string;
   registerSubmitCallback: (_: () => void) => void;
+  keyValueSource?: () => Array<string>;
+  itemValueSource?: () => Array<string>;
 }
 
 interface MapConfigurationElement {
@@ -15,6 +17,8 @@ const MapConfigurationItem: React.FC<MapConfigurationItemProps> = ({
   configurationId,
   configurationName,
   registerSubmitCallback,
+  keyValueSource,
+  itemValueSource,
 }: MapConfigurationItemProps) => {
   const [value, setValue] = useState<Array<MapConfigurationElement>>(
     JSON.parse(localStorage.getItem(configurationId) || "[]"),
@@ -25,7 +29,6 @@ const MapConfigurationItem: React.FC<MapConfigurationItemProps> = ({
 
   useEffect(() => {
     const onSubmit = () => {
-      console.log(`Setting ${configurationId} value ${valueRef.current}`);
       localStorage.setItem(configurationId, JSON.stringify(valueRef.current));
     };
     registerSubmitCallback(onSubmit);
@@ -51,28 +54,54 @@ const MapConfigurationItem: React.FC<MapConfigurationItemProps> = ({
       <br />
       {value.map((element, index) => (
         <>
-          <input
-            type="text"
-            key={`${configurationId}-key-${index}`}
-            defaultValue={element.key}
-            onChange={(e) => setKey(index, e.target.value)}
-          />
-          <input
-            type="text"
-            key={`${configurationId}-item-${index}`}
-            defaultValue={element.item}
-            onChange={(e) => setItem(index, e.target.value)}
-          />
+          {keyValueSource ? (
+            <select
+              key={`${configurationId}-key-${index}`}
+              defaultValue={element.key}
+              onChange={(e) => setKey(index, e.target.value)}
+            >
+              {keyValueSource().map((item, itemIndex) => (
+                <option
+                  value={item}
+                  key={`${configurationId}-key-${index}-${itemIndex}`}
+                >
+                  {item}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <input
+              type="text"
+              key={`${configurationId}-key-${index}`}
+              defaultValue={element.key}
+              onChange={(e) => setKey(index, e.target.value)}
+            />
+          )}
+
+          {itemValueSource ? (
+            <select
+              key={`${configurationId}-item-${index}`}
+              defaultValue={element.item}
+              onChange={(e) => setItem(index, e.target.value)}
+            >
+              {itemValueSource().map((item) => (
+                <option value={item}>{item}</option>
+              ))}
+            </select>
+          ) : (
+            <input
+              type="text"
+              key={`${configurationId}-item-${index}`}
+              defaultValue={element.item}
+              onChange={(e) => setItem(index, e.target.value)}
+            />
+          )}
           <input
             type={"button"}
             value={"Remove"}
-            onClick={() => {
-              console.log(value.length);
-              console.log(valueRef.current.length);
-              console.log(value);
-              console.log(valueRef.current.splice(index, 1));
-              setValue(value.splice(index, 1));
-            }}
+            onClick={((i: number) => () => {
+              setValue(value.toSpliced(i, 1));
+            })(index)}
             key={`${configurationId}-remove-${index}`}
           />
           <br />
