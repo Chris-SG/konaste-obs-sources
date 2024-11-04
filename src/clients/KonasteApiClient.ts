@@ -7,6 +7,12 @@ const apiLookup = async <T>(path: String): Promise<T | undefined> => {
     .catch(() => undefined);
 };
 
+const openKonasteWebsocket = async (): Promise<WebSocket> => {
+  const konasteHost = localStorage.getItem("api-host")!;
+  console.log("Opening konaste-api WebSocket");
+  return new WebSocket(`ws://${konasteHost}/ws/game/ui`);
+};
+
 const getNowPlayingSong = async (): Promise<
   NowPlayingSongModel | undefined
 > => {
@@ -22,4 +28,4 @@ const getImage = (image: String): string => {
   return `http:///${konasteHost}/game/files?filename=${image}`;
 };
 
-export { getNowPlayingSong, getHistory, getImage };
+export { getNowPlayingSong, getHistory, getImage, openKonasteWebsocket };

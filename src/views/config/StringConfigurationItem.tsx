@@ -3,6 +3,7 @@ import { ReactElement, useEffect, useRef, useState } from "react";
 interface StringConfigurationItemProps {
   configurationId: string;
   configurationName?: string;
+  defaultValue?: string;
   type?: string;
   registerSubmitCallback: (_: () => void) => void;
 }
@@ -16,21 +17,22 @@ const Wrapper = ({
 }) => {
   if (!configurationName) return <>{children}</>;
   return (
-    <label>
-      {configurationName}
-      <>{children}</>
-    </label>
+    <>
+      <label>{configurationName}</label>
+      {children}
+    </>
   );
 };
 
 const StringConfigurationItem = ({
   configurationId,
   configurationName,
+  defaultValue = "",
   type = "text",
   registerSubmitCallback,
 }: StringConfigurationItemProps) => {
   const [value, setValue] = useState<string>(
-    localStorage.getItem(configurationId) || "",
+    localStorage.getItem(configurationId) || defaultValue,
   );
   const valueRef = useRef<string>("");
 

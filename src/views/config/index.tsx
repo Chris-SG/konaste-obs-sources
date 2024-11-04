@@ -56,6 +56,13 @@ const Config = () => {
           registerSubmitCallback={registerSubmitCallback}
         />
         <br />
+        <StringConfigurationItem
+          configurationId={"chapter-format"}
+          configurationName={"Chapter Save format"}
+          defaultValue={"{{NAME}} - {{ARTIST}}"}
+          registerSubmitCallback={registerSubmitCallback}
+        />
+        <br />
         <input type="submit" value="Submit" key={"submit"} />
       </form>
     </div>

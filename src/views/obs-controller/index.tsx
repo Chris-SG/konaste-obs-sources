@@ -6,15 +6,29 @@ import OBSWebSocket, {
 } from "obs-websocket-js";
 
 import { SceneTransition } from "../config";
+import {
+  getNowPlayingSong,
+  openKonasteWebsocket,
+} from "../../clients/KonasteApiClient.ts";
+
+const formatChapterText = async (chapterFormat: string): Promise<string> => {
+  const nowPlaying = await getNowPlayingSong();
+  if (!nowPlaying) {
+    return "";
+  }
+  return chapterFormat
+    .replace("{{NAME}}", nowPlaying.title)
+    .replace("{{ARTIST}}", nowPlaying.artist);
+};
 
 const ObsController = () => {
   const obsIp = localStorage.getItem("obs-ip") || "localhost",
     obsPort = localStorage.getItem("obs-port") || "4455",
     obsPassword = localStorage.getItem("obs-password") || undefined,
+    chapterFormat = localStorage.getItem("chapter-format") || "",
     sceneTransitions: Array<SceneTransition> = JSON.parse(
       localStorage.getItem("obs-scene-transitions") || "[]",
     ),
-    konasteHost = localStorage.getItem("api-host")!,
     [errors, setErrors] = useState<Array<string>>(Array.of()),
     [obsIsConnected, setObsIsConnected] = useState(false),
     [obsIsConnecting, setObsIsConnecting] = useState(false),
@@ -39,14 +53,16 @@ const ObsController = () => {
           sceneName: transition.SceneName,
         };
         await obs.call("SetCurrentProgramScene", request);
+        if (transition.UIEvent === "UI_SONG_PLAY") {
+          const formattedChapterFormat = await formatChapterText(chapterFormat);
+          if (formattedChapterFormat !== "") {
+            await obs.call("CreateRecordChapter", {
+              chapterName: formattedChapterFormat,
+            });
+          }
+        }
         setCurrentUI(event.data);
       }
-    },
-    openKonasteApiConnection = () => {
-      console.log("Opening konaste-api WebSocket");
-      const konasteWebsocket = new WebSocket(`ws://${konasteHost}:4573/ws/ui`);
-
-      setKonasteApi(konasteWebsocket);
     },
     openObsConnection = async () => {
       if (obsIsConnecting || obsIsConnected) return;
@@ -70,7 +86,7 @@ const ObsController = () => {
   }, []);
 
   useEffect(() => {
-    openKonasteApiConnection();
+    openKonasteWebsocket().then(setKonasteApi);
     openObsConnection();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
