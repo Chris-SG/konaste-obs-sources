@@ -54,10 +54,10 @@ const HistoryView = ({
   };
 
   return (
-    <table className="table-fixed content-evenly w-full">
+    <table className="table-fixed content-evenly w-full absolute left-0 top-0">
       <tbody>
         {history.map((item) => (
-          <tr className={"flex h-20 [&_td]:content-center "}>
+          <tr className={"flex h-20 [&_td]:content-center text-gray-200"}>
             <td>
               <div className="w-20">
                 <Difficulty
@@ -69,21 +69,21 @@ const HistoryView = ({
             <td>
               <ClearMark markType={item.clearMark} />
             </td>
-            <td className="w-2/6">
+            <td className="w-3/6">
               <div className="invisible">_</div>
-              <div className="font-bold">{item.songName}</div>
+              <div className="font-bold text-2xl truncate">{item.songName}</div>
               <div className="text-sm text-gray-400">{item.artist}</div>
             </td>
             <td className="w-1/6">
               <div className="invisible">_</div>
-              <div className="font-bold">{item.score}</div>
+              <div className="font-bold text-2xl">{item.score}</div>
               <div className="text-sm text-gray-400">
                 {calculateScoreUnderValue(item, scoreForm)}
               </div>
             </td>
             <td className="w-1/6">
               <div className="invisible">_</div>
-              <div className="font-bold">{item.exScore}</div>
+              <div className="font-bold text-2xl">{item.exScore}</div>
               <div className="text-sm text-gray-400">
                 {calculateExUnderValue(item, exForm)}
               </div>

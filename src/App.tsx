@@ -12,6 +12,7 @@ import NowPlayingSongView from "./views/gameplay/nowplaying/song/NowPlayingSongV
 import NowPlayingJacket from "./views/gameplay/nowplaying/jacket";
 import Radar from "./assets/radar";
 import HistoryView from "./views/gameplay/history/HistoryView.tsx";
+import History from "./views/gameplay/history";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
       <Route path="/gameplay" nest>
         <Route path="/score">
           <Score />
+        </Route>
+        <Route path="/history">
+          <History />
         </Route>
         <Route path="/nowplaying" nest>
           <Route path="/song">
@@ -100,6 +104,22 @@ function App() {
                   combo: 1722,
                   bestScore: 9992322,
                   maxEx: 8022,
+                  imagePath: "",
+                },
+                {
+                  songName:
+                    "A very long song name to display clipping of table",
+                  artist: "My Artist",
+                  clearMark: "comp",
+                  score: 9587223,
+                  difficulty: "exhaust",
+                  infiniteVersion: 0,
+                  level: 16,
+                  exScore: 4733,
+                  bestExScore: 5722,
+                  combo: 1232,
+                  bestScore: 9733727,
+                  maxEx: 6223,
                   imagePath: "",
                 },
               )}

@@ -38,11 +38,11 @@ div.description {
 }
 
 div.warning {
-  background-color: #330000;
-  border: 3px solid #700;
-  border-radius: 1rem;
-  padding: 1rem;
-  margin: 2rem 0;
-  fill-opacity: 20%;
-  font-size: 0.8em;
+  /*background-color: #330000;*/
+  /*border: 3px solid #700;*/
+  /*border-radius: 1rem;*/
+  /*padding: 1rem;*/
+  /*margin: 2rem 0;*/
+  /*fill-opacity: 20%;*/
+  /*font-size: 0.8em;*/
 }
