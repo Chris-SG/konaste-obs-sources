@@ -27,8 +27,10 @@ const HistoryView = ({
         return " ";
       case "best":
         return historyEntry.bestScore;
-      case "under-best":
-        return `-${Math.max(historyEntry.bestScore, historyEntry.score) - historyEntry.score}`;
+      case "under-best": {
+        const marker = historyEntry.bestScore <= historyEntry.score ? "+" : "-";
+        return `${marker}${Math.abs(historyEntry.bestScore - historyEntry.score)}`;
+      }
       case "perfect":
         return "10000000";
       case "under-perfect":
@@ -44,8 +46,11 @@ const HistoryView = ({
         return " ";
       case "best":
         return historyEntry.bestExScore;
-      case "under-best":
-        return `-${Math.max(historyEntry.bestExScore, historyEntry.exScore) - historyEntry.exScore}`;
+      case "under-best": {
+        const marker =
+          historyEntry.bestExScore <= historyEntry.exScore ? "+" : "-";
+        return `${marker}${Math.abs(historyEntry.bestExScore - historyEntry.exScore)}`;
+      }
       case "perfect":
         return historyEntry.maxEx;
       case "under-perfect":

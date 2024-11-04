@@ -20,6 +20,8 @@ const ClearMark = ({ markType }: { markType: ClearMarkType }) => {
         return TextUc;
       case "played":
         return TextPlayed;
+      case "no":
+        return TextPlayed;
     }
   })();
   return (

@@ -16,7 +16,20 @@ interface NowPlayingSongModel {
   jacketBig: string;
 }
 
-type ClearMarkType = "puc" | "comp" | "ex" | "uc" | "played";
+type ClearMarkType = "puc" | "comp" | "ex" | "uc" | "played" | "no";
+
+type Grade =
+  | "S"
+  | "AAA+"
+  | "AAA"
+  | "AA+"
+  | "AA"
+  | "A+"
+  | "A"
+  | "B"
+  | "C"
+  | "D"
+  | "no";
 
 interface History {
   songName: string;
@@ -29,8 +42,11 @@ interface History {
   combo: number;
   bestScore: number;
   bestExScore: number;
-  clearMark: ClearMarkType;
   maxEx: number;
+  clearMark: ClearMarkType;
+  bestClearMark: ClearMarkType;
+  grade: Grade;
+  bestGrade: Grade;
   imagePath: string;
 }
 

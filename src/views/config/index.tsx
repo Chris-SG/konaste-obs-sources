@@ -3,11 +3,6 @@ import React from "react";
 import StringConfigurationItem from "./StringConfigurationItem.tsx";
 import MapConfigurationItem from "./MapConfigurationItem.tsx";
 
-interface SceneTransition {
-  SceneName: string;
-  UIEvent: string;
-}
-
 const Config = () => {
   let onSubmitCallbacks: Array<() => void> = Array.of();
 
@@ -70,5 +65,3 @@ const Config = () => {
 };
 
 export default Config;
-
-export type { SceneTransition };

@@ -6,7 +6,7 @@ interface MapConfigurationItemProps {
   registerSubmitCallback: (_: () => void) => void;
 }
 
-interface Element {
+interface MapConfigurationElement {
   key: string;
   item: string;
 }
@@ -16,10 +16,10 @@ const MapConfigurationItem: React.FC<MapConfigurationItemProps> = ({
   configurationName,
   registerSubmitCallback,
 }: MapConfigurationItemProps) => {
-  const [value, setValue] = useState<Array<Element>>(
+  const [value, setValue] = useState<Array<MapConfigurationElement>>(
     JSON.parse(localStorage.getItem(configurationId) || "[]"),
   );
-  const valueRef = useRef<Array<Element>>(value);
+  const valueRef = useRef<Array<MapConfigurationElement>>(value);
 
   valueRef.current = value;
 
@@ -29,7 +29,7 @@ const MapConfigurationItem: React.FC<MapConfigurationItemProps> = ({
       localStorage.setItem(configurationId, JSON.stringify(valueRef.current));
     };
     registerSubmitCallback(onSubmit);
-    console.log("registerd");
+    console.log("registered");
   }, [configurationId, registerSubmitCallback]);
 
   const setKey = (index: number, value: string) => {
@@ -89,3 +89,5 @@ const MapConfigurationItem: React.FC<MapConfigurationItemProps> = ({
 };
 
 export default MapConfigurationItem;
+
+export type { MapConfigurationElement };

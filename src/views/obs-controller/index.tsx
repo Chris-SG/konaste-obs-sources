@@ -5,11 +5,11 @@ import OBSWebSocket, {
   OBSWebSocketError,
 } from "obs-websocket-js";
 
-import { SceneTransition } from "../config";
 import {
   getNowPlayingSong,
   openKonasteWebsocket,
 } from "../../clients/KonasteApiClient.ts";
+import { MapConfigurationElement } from "../config/MapConfigurationItem.tsx";
 
 const formatChapterText = async (chapterFormat: string): Promise<string> => {
   const nowPlaying = await getNowPlayingSong();
@@ -26,7 +26,7 @@ const ObsController = () => {
     obsPort = localStorage.getItem("obs-port") || "4455",
     obsPassword = localStorage.getItem("obs-password") || undefined,
     chapterFormat = localStorage.getItem("chapter-format") || "",
-    sceneTransitions: Array<SceneTransition> = JSON.parse(
+    sceneTransitions: Array<MapConfigurationElement> = JSON.parse(
       localStorage.getItem("obs-scene-transitions") || "[]",
     ),
     [errors, setErrors] = useState<Array<string>>(Array.of()),
@@ -44,25 +44,27 @@ const ObsController = () => {
       if (!obsIsConnected) {
         return;
       }
-      const transition = sceneTransitions.find((t) => t.UIEvent === event.data);
-      if (transition !== undefined && transition.UIEvent !== currentUI) {
+
+      if (event.data === "UI_SONG_PLAY") {
+        const formattedChapterFormat = await formatChapterText(chapterFormat);
+        if (formattedChapterFormat !== "") {
+          await obs.call("CreateRecordChapter", {
+            chapterName: formattedChapterFormat,
+          });
+        }
+      }
+
+      const transition = sceneTransitions.find((t) => t.key === event.data);
+      if (transition !== undefined && transition.key !== currentUI) {
         console.log(
-          `UI changed from ${currentUI} to ${transition.UIEvent} - changing scene to ${transition.SceneName}`,
+          `UI changed from ${currentUI} to ${transition.key} - changing scene to ${transition.item}`,
         );
         const request: OBSRequestTypes["SetCurrentProgramScene"] = {
-          sceneName: transition.SceneName,
+          sceneName: transition.item,
         };
         await obs.call("SetCurrentProgramScene", request);
-        if (transition.UIEvent === "UI_SONG_PLAY") {
-          const formattedChapterFormat = await formatChapterText(chapterFormat);
-          if (formattedChapterFormat !== "") {
-            await obs.call("CreateRecordChapter", {
-              chapterName: formattedChapterFormat,
-            });
-          }
-        }
-        setCurrentUI(event.data);
       }
+      setCurrentUI(event.data);
     },
     openObsConnection = async () => {
       if (obsIsConnecting || obsIsConnected) return;
