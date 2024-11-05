@@ -16,7 +16,7 @@ interface NowPlayingSongModel {
   jacketBig: string;
 }
 
-type ClearMarkType = "puc" | "comp" | "ex" | "uc" | "played" | "no";
+type ClearMarkType = "no" | "played" | "comp" | "ex" | "uc" | "puc";
 
 type Grade =
   | "S"
@@ -58,6 +58,14 @@ const DifficultyToNumerical: { [index: string]: number } = {
   infinite: 4,
 };
 
-export type { ClearMarkType, History, NowPlayingSongModel };
+type ScoreTableType = Map<number, Map<ClearMarkType, number>>;
+
+export type {
+  ClearMarkType,
+  History,
+  Grade,
+  NowPlayingSongModel,
+  ScoreTableType,
+};
 
 export { DifficultyToNumerical };

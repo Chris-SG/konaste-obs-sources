@@ -1,4 +1,8 @@
-import { History, NowPlayingSongModel } from "./KonasteModels.ts";
+import {
+  History,
+  NowPlayingSongModel,
+  ScoreTableType,
+} from "./KonasteModels.ts";
 
 const apiLookup = async <T>(path: String): Promise<T | undefined> => {
   const konasteHost = localStorage.getItem("api-host")!;
@@ -19,6 +23,10 @@ const getNowPlayingSong = async (): Promise<
   return apiLookup<NowPlayingSongModel>("game/nowplaying");
 };
 
+const getScoreTable = async (type: "level" | "difficulty") => {
+  return apiLookup<ScoreTableType>(`game/table/${type}/mark`);
+};
+
 const getHistory = async (): Promise<Array<History> | undefined> => {
   return apiLookup<Array<History>>("game/history");
 };
@@ -28,4 +36,10 @@ const getImage = (image: String): string => {
   return `http:///${konasteHost}/game/files?filename=${image}`;
 };
 
-export { getNowPlayingSong, getHistory, getImage, openKonasteWebsocket };
+export {
+  getNowPlayingSong,
+  getHistory,
+  getImage,
+  getScoreTable,
+  openKonasteWebsocket,
+};
