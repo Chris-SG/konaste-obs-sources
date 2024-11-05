@@ -9,37 +9,38 @@
     text-Anchor: middle;
 }
 
-text {
+.difficulty text {
     font-size: 14px;
     font-family: "CommadorExtended", sans-serif;
     filter: url(#subtle-white-outline);
-    &.novice {
-        fill: #4d0093;
-    }
-    &.advanced {
-        fill: #ffaf1f;
-    }
-    &.exhaust {
-        fill: #AB2020;
-    }
-    &.maximum {
-        fill: #999999;
-    }
-    &.infinite {
-        fill: #b116c3;
-    }
-    &.gravity {
-        fill: #c87c17;
-    }
-    &.heavenly {
-        fill: #1676aa;
-    }
-    &.vivid {
-        fill: #cf15cc;
-    }
-    &.exceed {
+}
 
-    }
+text.novice {
+    fill: #4d0093;
+}
+text.advanced {
+    fill: #ffaf1f;
+}
+text.exhaust {
+    fill: #AB2020;
+}
+text.maximum {
+    fill: #999999;
+}
+text.infinite {
+    fill: #b116c3;
+}
+text.gravity {
+    fill: #c87c17;
+}
+text.heavenly {
+    fill: #1676aa;
+}
+text.vivid {
+    fill: #cf15cc;
+}
+text.exceed {
+
 }
 
 svg.novice {

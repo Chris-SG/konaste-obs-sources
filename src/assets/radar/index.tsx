@@ -41,9 +41,9 @@ const Radar = ({
   return (
     <svg
       className="radarcontainer"
-      width={400}
-      height={400}
-      viewBox="0 0 300 300"
+      width="50%"
+      height="50%"
+      viewBox="-50 -50 225 250"
       overflow="visible"
     >
       <svg
@@ -92,42 +92,42 @@ const Radar = ({
       <text
         x={halfRadarDimension}
         y={halfRadarDimension - textOffset}
-        className={"notes"}
+        className={"notes fill-cyan-300"}
       >
         NOTES
       </text>
       <text
         x={halfRadarDimension + textPos1}
         y={halfRadarDimension - textPos2}
-        className={"peak"}
+        className={"peak fill-red-600"}
       >
         PEAK
       </text>
       <text
         x={halfRadarDimension + textPos1}
         y={halfRadarDimension + textPos2}
-        className={"tsumami"}
+        className={"tsumami fill-pink-600"}
       >
         TSUMAMI
       </text>
       <text
         x={halfRadarDimension}
         y={halfRadarDimension + textOffset}
-        className={"tricky"}
+        className={"tricky fill-yellow-300"}
       >
         TRICKY
       </text>
       <text
         x={halfRadarDimension - textPos1}
         y={halfRadarDimension + textPos2}
-        className={"handtrip"}
+        className={"handtrip fill-purple-500"}
       >
         HAND TRIP
       </text>
       <text
         x={halfRadarDimension - textPos1}
         y={halfRadarDimension - textPos2}
-        className={"onehand"}
+        className={"onehand fill-lime-400"}
       >
         ONE HAND
       </text>

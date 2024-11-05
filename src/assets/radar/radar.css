@@ -40,23 +40,4 @@ svg.radar {
     font-size: 10px;
     stroke: black;
     stroke-width: 0.5px;
-
-    &.notes {
-        fill: cyan;
-    }
-    &.peak {
-        fill: red;
-    }
-    &.tsumami {
-        fill: deeppink;
-    }
-    &.tricky {
-        fill: yellow;
-    }
-    &.handtrip {
-        fill: mediumpurple;
-    }
-    &.onehand {
-        fill: limegreen;
-    }
 }
