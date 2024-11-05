@@ -24,7 +24,7 @@ const getNowPlayingSong = async (): Promise<
 };
 
 const getScoreTable = async (type: "level" | "difficulty") => {
-  return apiLookup<ScoreTableType>(`game/table/${type}/mark`);
+  return apiLookup<ScoreTableType>(`scores/table/${type}/mark`);
 };
 
 const getHistory = async (): Promise<Array<History> | undefined> => {
