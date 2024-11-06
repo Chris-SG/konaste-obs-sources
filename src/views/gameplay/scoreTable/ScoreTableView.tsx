@@ -15,7 +15,7 @@ const types: Array<ClearMarkType> = Array.of(
 
 const buildItemRow = (heading: string, v: Map<ClearMarkType, number>) => {
   let total = 0;
-  v.values().forEach((v) => {
+  Array.from(v).map(([_, v]) => {
     total += v;
   });
   return (
@@ -33,7 +33,7 @@ const buildItemRow = (heading: string, v: Map<ClearMarkType, number>) => {
 const ScoreTableView = ({ data }: { data: ScoreTableType }) => {
   return (
     <>
-      <table className="table-auto content-evenly absolute left-0 top-0 [&_td]:w-1/16 [&_td]:h-16">
+      <table className="table-auto content-evenly absolute left-0 top-0 [&_td]:w-1/16 [&_td]:h-16 [&_td]:p-2">
         <tbody>
           <tr>
             <td></td>
