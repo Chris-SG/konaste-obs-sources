@@ -40,12 +40,11 @@ const ScoreTableView = ({ data }: { data: ScoreTableType }) => {
               </td>
             ))}
           </tr>
-          {data
-            .entries()
-            .map((a) => (
-              <tr className={""}>{buildItemRow(a[0].toString(), a[1])}</tr>
-            ))
-            .toArray()}
+          {Array.from(data).map(([key, value]) => (
+            <tr key={key} className="">
+              {buildItemRow(key.toString(), value)}
+            </tr>
+          ))}
         </tbody>
       </table>
     </>
