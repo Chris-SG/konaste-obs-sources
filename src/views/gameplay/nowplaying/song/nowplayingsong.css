@@ -1,6 +1,5 @@
 div.now-playing-song {
   font-family: "CommadorExtended", sans-serif;
-  display: flex;
 }
 
 .song-name::before {

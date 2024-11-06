@@ -23,11 +23,13 @@ const NowPlayingSongView = ({
   );
   return (
     <>
-      <div className="now-playing-song">
-        <Difficulty difficulty={difficultyLevel} level={level} />
-        <div>
-          <div className="song-name">{songName}</div>
-          <div className="artist">{artist}</div>
+      <div className="now-playing-song flex h-40">
+        <div className="w-1/4">
+          <Difficulty difficulty={difficultyLevel} level={level} />
+        </div>
+        <div className="w-full">
+          <div className="song-name text-8xl text-gray-200">{songName}</div>
+          <div className="artist text-4xl text-gray-300">{artist}</div>
         </div>
       </div>
     </>
