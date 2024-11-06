@@ -6,26 +6,26 @@ import OBSWebSocket, {
 } from "obs-websocket-js";
 
 import {
-  getNowPlayingSong,
+  // getNowPlayingSong,
   openKonasteWebsocket,
 } from "../../clients/KonasteApiClient.ts";
 import { MapConfigurationElement } from "../config/MapConfigurationItem.tsx";
 
-const formatChapterText = async (chapterFormat: string): Promise<string> => {
-  const nowPlaying = await getNowPlayingSong();
-  if (!nowPlaying) {
-    return "";
-  }
-  return chapterFormat
-    .replace("{{NAME}}", nowPlaying.title)
-    .replace("{{ARTIST}}", nowPlaying.artist);
-};
+// const formatChapterText = async (chapterFormat: string): Promise<string> => {
+//   const nowPlaying = await getNowPlayingSong();
+//   if (!nowPlaying) {
+//     return "";
+//   }
+//   return chapterFormat
+//     .replace("{{NAME}}", nowPlaying.title)
+//     .replace("{{ARTIST}}", nowPlaying.artist);
+// };
 
 const ObsController = () => {
   const obsIp = localStorage.getItem("obs-ip") || "localhost",
     obsPort = localStorage.getItem("obs-port") || "4455",
     obsPassword = localStorage.getItem("obs-password") || undefined,
-    chapterFormat = localStorage.getItem("chapter-format") || "",
+    // chapterFormat = localStorage.getItem("chapter-format") || "",
     sceneTransitions: Array<MapConfigurationElement> = JSON.parse(
       localStorage.getItem("obs-scene-transitions") || "[]",
     ),
@@ -45,14 +45,14 @@ const ObsController = () => {
         return;
       }
 
-      if (event.data === "UI_SONG_PLAY") {
-        const formattedChapterFormat = await formatChapterText(chapterFormat);
-        if (formattedChapterFormat !== "") {
-          await obs.call("CreateRecordChapter", {
-            chapterName: formattedChapterFormat,
-          });
-        }
-      }
+      // if (event.data === "UI_SONG_PLAY") {
+      //   const formattedChapterFormat = await formatChapterText(chapterFormat);
+      //   if (formattedChapterFormat !== "") {
+      //     await obs.call("CreateRecordChapter", {
+      //       chapterName: formattedChapterFormat,
+      //     });
+      //   }
+      // }
 
       const transition = sceneTransitions.find((t) => t.key === event.data);
       if (transition !== undefined && transition.key !== currentUI) {
