@@ -14,7 +14,10 @@ const types: Array<ClearMarkType> = Array.of(
 );
 
 const buildItemRow = (heading: string, v: Map<ClearMarkType, number>) => {
-  const total = v.values().reduce((acc, n) => acc + n);
+  let total = 0;
+  v.values().forEach((v) => {
+    total += v;
+  });
   return (
     <>
       <th className="font-bold text-4xl text-yellow-300">{heading}</th>
