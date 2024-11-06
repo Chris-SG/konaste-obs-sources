@@ -96,6 +96,7 @@ function App() {
                   ],
                 ])
               }
+              additive={true}
             />
           </Route>
           <Route path="/nowplaying" nest>

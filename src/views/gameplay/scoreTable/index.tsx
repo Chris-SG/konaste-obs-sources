@@ -45,6 +45,7 @@ const ScoreTable = ({
   const endingLevel: number = Number.parseInt(
     urlSearchParams.get("level_end") || "20",
   );
+  const additive: boolean = urlSearchParams.get("additive") !== null;
 
   useEffect(() => {
     document.documentElement.classList.add("transparent");
@@ -55,6 +56,7 @@ const ScoreTable = ({
       if (table === undefined) {
         return;
       }
+
       if (grouping === "level") {
         setScoreTable(
           new Map(
@@ -77,10 +79,11 @@ const ScoreTable = ({
       }
     });
   }, []);
+
   if (scoreTable === undefined) {
     return <></>;
   }
-  return <ScoreTableView data={scoreTable} />;
+  return <ScoreTableView data={scoreTable} additive={additive} />;
 };
 
 export default ScoreTable;
