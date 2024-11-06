@@ -27,7 +27,7 @@ const ObsController = () => {
     obsPassword = localStorage.getItem("obs-password") || undefined,
     // chapterFormat = localStorage.getItem("chapter-format") || "",
     sceneTransitions: Array<MapConfigurationElement> = JSON.parse(
-      localStorage.getItem("obs-scene-transitions") || "[]",
+      localStorage.getItem("scene-transitions") || "[]",
     ),
     [errors, setErrors] = useState<Array<string>>(Array.of()),
     [obsIsConnected, setObsIsConnected] = useState(false),
