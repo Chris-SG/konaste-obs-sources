@@ -7,7 +7,8 @@ import {
 const apiLookup = async <T>(path: String): Promise<T | undefined> => {
   const konasteHost = localStorage.getItem("api-host")!;
   return fetch(`http://${konasteHost}/${path}`)
-    .then((response) => response.json() as Promise<T>)
+    .then((response) => response.json())
+    .then((response: T) => response)
     .catch(() => undefined);
 };
 
@@ -24,7 +25,15 @@ const getNowPlayingSong = async (): Promise<
 };
 
 const getScoreTable = async (type: "level" | "difficulty") => {
-  return apiLookup<ScoreTableType>(`scores/table/${type}/mark`);
+  return apiLookup<ScoreTableType>(`scores/table/${type}/mark`).then((data) => {
+    if (!data) return data;
+    return new Map(
+      Object.entries(data).map(([key, innerObject]) => [
+        key,
+        new Map(Object.entries(innerObject as Record<string, number>)),
+      ]),
+    ) as unknown as ScoreTableType;
+  });
 };
 
 const getHistory = async (): Promise<Array<History> | undefined> => {

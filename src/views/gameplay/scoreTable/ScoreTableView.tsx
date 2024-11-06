@@ -4,23 +4,6 @@ import {
 } from "../../../clients/KonasteModels.ts";
 import ClearMark from "../../../assets/clear-mark";
 
-const buildItemRow = (heading: string, v: Map<ClearMarkType, number>) => {
-  const total = v.values().reduce((acc, n) => acc + n);
-  return (
-    <>
-      <th className="font-bold text-4xl text-yellow-300">{heading}</th>
-      {v
-        .values()
-        .map((entry) => (
-          <td className="text-2xl text-gray-200">
-            {entry}/{total}
-          </td>
-        ))
-        .toArray()}
-    </>
-  );
-};
-
 const types: Array<ClearMarkType> = Array.of(
   "no",
   "played",
@@ -30,16 +13,24 @@ const types: Array<ClearMarkType> = Array.of(
   "puc",
 );
 
-const ScoreTableView = ({ data }: { data: ScoreTableType }) => {
-  console.log(
-    data
-      .entries()
-      .map((s) => s[0])
-      .toArray(),
-  );
+const buildItemRow = (heading: string, v: Map<ClearMarkType, number>) => {
+  const total = v.values().reduce((acc, n) => acc + n);
   return (
     <>
-      <table className="table-auto content-evenly absolute left-0 top-0 [&_td]:w-1/12 [&_td]:h-16">
+      <th className="font-bold text-4xl text-yellow-300">{heading}</th>
+      {types.map((type) => (
+        <td className="text-2xl text-gray-200">
+          {v.get(type) || 0}/{total}
+        </td>
+      ))}
+    </>
+  );
+};
+
+const ScoreTableView = ({ data }: { data: ScoreTableType }) => {
+  return (
+    <>
+      <table className="table-auto content-evenly absolute left-0 top-0 [&_td]:w-1/16 [&_td]:h-16">
         <tbody>
           <tr>
             <td></td>
