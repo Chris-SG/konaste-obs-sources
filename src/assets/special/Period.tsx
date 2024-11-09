@@ -14,7 +14,7 @@ const Period = ({ fill }: { fill: string }) => {
         height="10"
         fill={fill}
         stroke="black"
-        stroke-width="2"
+        strokeWidth="2"
       />
     </svg>
   );

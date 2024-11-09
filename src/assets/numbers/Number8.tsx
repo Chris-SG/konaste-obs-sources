@@ -7,18 +7,25 @@ const Number8 = ({ fill }: { fill: string }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g fill={fill} fillRule="evenodd">
+      <defs>
+        <mask id="mask_number_8">
+          <rect width="100%" height="100%" fill="white" />
+          <path d="M55 45V55H17V45H55ZM55 27H17V17H55V27Z" fill="black" />
+        </mask>
+      </defs>
+      <g>
         <path
           d="M71 54.5858L54.5858 71H1V19.3472L15.4846 1H71V54.5858Z"
-          // fill="url(#paint0_linear_28_43)"
           stroke="black"
           strokeWidth="2"
+          mask="url(#mask_number_8)"
+          fill={fill}
         />
         <path
           d="M55 45V55H17V45H55ZM55 27H17V17H55V27Z"
-          // fill="url(#paint0_linear_28_43)"
           stroke="black"
           strokeWidth="2"
+          fill="none"
         />
       </g>
     </svg>

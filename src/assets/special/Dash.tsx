@@ -11,7 +11,7 @@ const Dash = ({ fill }: { fill: string }) => {
         d="M18.4142 29H68.5858L53.5858 44H3.41421L18.4142 29Z"
         stroke="black"
         fill={fill}
-        stroke-width="2"
+        strokeWidth="2"
       />
     </svg>
   );
