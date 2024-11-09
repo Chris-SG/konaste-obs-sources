@@ -1,4 +1,4 @@
-const Number1 = ({ fill }: { fill: string }) => {
+const Dash = ({ fill }: { fill: string }) => {
   return (
     <svg
       width="72"
@@ -8,13 +8,13 @@ const Number1 = ({ fill }: { fill: string }) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M37 17V16H36H21.4142L36.4142 1H52V71H37V17Z"
-        fill={fill}
+        d="M18.4142 29H68.5858L53.5858 44H3.41421L18.4142 29Z"
         stroke="black"
-        strokeWidth="2"
+        fill={fill}
+        stroke-width="2"
       />
     </svg>
   );
 };
 
-export default Number1;
+export default Dash;

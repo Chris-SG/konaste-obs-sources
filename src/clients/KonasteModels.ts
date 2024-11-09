@@ -2,6 +2,7 @@ interface NowPlayingSongModel {
   songId: number;
   title: string;
   artist: string;
+  difficultyId: number;
   difficulty: string;
   infiniteVersion: number;
   level: number;
@@ -50,6 +51,33 @@ interface History {
   imagePath: string;
 }
 
+/*
+    val difficulty: Int,
+    val konasteScore: Int,
+    val konasteEx: Int,
+    val konasteClearType: Int,
+    val konasteGrade: Int,
+    val maxChain: Int,
+    val timestamp: Int,
+    val arcadeScore: Int,
+    val arcadeEx: Int,
+    val arcadeClearType: Int,
+    val arcadeGrade: Int,
+ */
+interface SongDifficultyScoreInfo {
+  difficulty: number;
+  konasteScore: number;
+  konasteEx: number;
+  konasteClearType: number;
+  konasteGrade: number;
+  maxChain: number;
+  timestamp: number;
+  arcadeScore: number;
+  arcadeEx: number;
+  arcadeClearType: number;
+  arcadeGrade: number;
+}
+
 const DifficultyToNumerical: { [index: string]: number } = {
   novice: 0,
   advanced: 1,
@@ -65,6 +93,7 @@ export type {
   History,
   Grade,
   NowPlayingSongModel,
+  SongDifficultyScoreInfo,
   ScoreTableType,
 };
 

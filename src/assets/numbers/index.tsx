@@ -8,47 +8,85 @@ import Number6 from "./Number6.tsx";
 import Number7 from "./Number7.tsx";
 import Number8 from "./Number8.tsx";
 import Number9 from "./Number9.tsx";
+import { Dash, Percent, Period } from "../special";
 
-const asSvg = (n: number) => {
-  switch (n) {
-    case 0:
-      return <Number0 />;
-    case 1:
-      return <Number1 />;
-    case 2:
-      return <Number2 />;
-    case 3:
-      return <Number3 />;
-    case 4:
-      return <Number4 />;
-    case 5:
-      return <Number5 />;
-    case 6:
-      return <Number6 />;
-    case 7:
-      return <Number7 />;
-    case 8:
-      return <Number8 />;
-    case 9:
-      return <Number9 />;
+const asSvg = (e: string, fill: string) => {
+  switch (e) {
+    case "0":
+      return <Number0 fill={fill} />;
+    case "1":
+      return <Number1 fill={fill} />;
+    case "2":
+      return <Number2 fill={fill} />;
+    case "3":
+      return <Number3 fill={fill} />;
+    case "4":
+      return <Number4 fill={fill} />;
+    case "5":
+      return <Number5 fill={fill} />;
+    case "6":
+      return <Number6 fill={fill} />;
+    case "7":
+      return <Number7 fill={fill} />;
+    case "8":
+      return <Number8 fill={fill} />;
+    case "9":
+      return <Number9 fill={fill} />;
+    case "-":
+      return <Dash fill={fill} />;
+    case ".":
+      return <Period fill={fill} />;
     default:
-      return <Number0 />;
+      return <Number0 fill={fill} />;
   }
 };
 
 const RenderedNumber = ({
   value,
   length,
+  percentage = false,
 }: {
-  value: number;
+  value: number | string | Array<string>;
   length?: number;
+  percentage?: boolean;
 }) => {
-  const numbers = ("" + value)
-    .padStart(length || value.toString().length, "0")
-    .split("")
-    .map(Number);
+  const gradientId = "paint0_linear_rendered_number";
+  const fill = `url(#${gradientId})`;
+  let display = [];
 
-  return <div className="flex w-full space-x-0.5">{numbers.map(asSvg)}</div>;
+  if (typeof value === "number") {
+    display = ("" + value)
+      .padStart(length || value.toString().length, "0")
+      .split("");
+  } else if (typeof value === "string") {
+    display = value.split("");
+  } else {
+    display = value;
+  }
+
+  return (
+    <div className="flex">
+      <svg width="0" height="0" viewBox="0 0 0 0">
+        <defs>
+          <linearGradient
+            id={gradientId}
+            x1="72"
+            y1="0"
+            x2="0"
+            y2="72"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#DADADA" />
+            <stop offset="0.5" stopColor="#EAEAEA" />
+            <stop offset="0.5" stopColor="#B0BCCA" />
+            <stop offset="1" stopColor="#E5EFF9" />
+          </linearGradient>
+        </defs>
+      </svg>
+      {display.map((n) => asSvg(n, fill))}
+      {percentage && <Percent fill={fill} />}
+    </div>
+  );
 };
 
 export default RenderedNumber;

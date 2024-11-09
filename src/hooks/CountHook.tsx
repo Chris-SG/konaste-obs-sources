@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 const easeOutQuad = (t: number) => t * (2 - t),
   frameDuration = 1000 / 60,
-  useCount = ({ duration }: { duration: number }) => {
+  useCount = ({ duration, sigfig }: { duration: number; sigfig: number }) => {
     const [count, setCount] = useState(0),
       [start, setStart] = useState(0),
       [end, setEnd] = useState(0),
@@ -21,7 +21,8 @@ const easeOutQuad = (t: number) => t * (2 - t),
       counter.current = setInterval(() => {
         frame++;
         const progress = easeOutQuad(frame / totalFrames);
-        setCount(Math.floor(start + (end - start) * progress));
+        const sf = Math.pow(10, sigfig);
+        setCount(Math.floor((start + (end - start) * progress) * sf) / sf);
         if (frame === totalFrames) {
           clearInterval(counter.current);
         }

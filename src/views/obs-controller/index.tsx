@@ -7,7 +7,7 @@ import OBSWebSocket, {
 
 import {
   // getNowPlayingSong,
-  openKonasteWebsocket,
+  openGameUiWebSocket,
 } from "../../clients/KonasteApiClient.ts";
 import { MapConfigurationElement } from "../config/MapConfigurationItem.tsx";
 
@@ -88,7 +88,7 @@ const ObsController = () => {
   }, []);
 
   useEffect(() => {
-    openKonasteWebsocket().then(setKonasteApi);
+    openGameUiWebSocket().then(setKonasteApi);
     openObsConnection();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

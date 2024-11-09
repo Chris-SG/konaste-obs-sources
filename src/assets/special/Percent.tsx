@@ -1,4 +1,4 @@
-const Number2 = ({ fill }: { fill: string }) => {
+const Percent = ({ fill }: { fill: string }) => {
   return (
     <svg
       width="72"
@@ -8,13 +8,14 @@ const Number2 = ({ fill }: { fill: string }) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M55 16H1V1H54.5858L71 17.4142V44H17H16V45V55V56H17H71V71H1V45.4142L17.4142 29H42.5858L54.2929 40.7071L56 42.4142V40V17V16H55Z"
-        fill={fill}
+        d="M60.402 1L26.3742 71H11.598L45.6258 1H60.402ZM18.5 17H11V2H26V17H18.5ZM61 69.5H46V54.5H61V69.5Z"
         stroke="black"
         strokeWidth="2"
+        fill={fill}
+        fillRule={"evenodd"}
       />
     </svg>
   );
 };
 
-export default Number2;
+export default Percent;

@@ -1,5 +1,5 @@
 // todo: number6 is not 100% correct
-const Number6 = () => {
+const Number6 = ({ fill }: { fill: string }) => {
   return (
     <svg
       width="72"
@@ -10,7 +10,7 @@ const Number6 = () => {
     >
       <path
         d="M54.3979 1L62.3391 16H17H16V17V28V29H17H54.5229L71 49.354V54.5858L54.5858 71H17.4142L1 54.5858V18.3976L17.431 1H54.3979Z"
-        fill="url(#paint0_linear_28_43)"
+        fill={fill}
         stroke="black"
         strokeWidth="2"
       />

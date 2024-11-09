@@ -2,6 +2,7 @@ import {
   History,
   NowPlayingSongModel,
   ScoreTableType,
+  SongDifficultyScoreInfo,
 } from "./KonasteModels.ts";
 
 const apiLookup = async <T>(path: String): Promise<T | undefined> => {
@@ -12,16 +13,35 @@ const apiLookup = async <T>(path: String): Promise<T | undefined> => {
     .catch(() => undefined);
 };
 
-const openKonasteWebsocket = async (): Promise<WebSocket> => {
+const openKonasteWebsocket = async (path: String) => {
   const konasteHost = localStorage.getItem("api-host")!;
   console.log("Opening konaste-api WebSocket");
-  return new WebSocket(`ws://${konasteHost}/ws/game/ui`);
+  return new WebSocket(`ws://${konasteHost}/${path}`);
+};
+
+const openGameUiWebSocket = async (): Promise<WebSocket> => {
+  return openKonasteWebsocket("ws/game/ui");
+};
+
+const openNowPlayingStatsWebSocket = async (
+  rate?: number,
+): Promise<WebSocket> => {
+  return openKonasteWebsocket(`ws/game/nowplaying/stats?rate=${rate || 1000}`);
 };
 
 const getNowPlayingSong = async (): Promise<
   NowPlayingSongModel | undefined
 > => {
   return apiLookup<NowPlayingSongModel>("game/nowplaying");
+};
+
+const getSongDifficultyScoreInfo = async (
+  songId: number,
+  difficultyId: number,
+): Promise<SongDifficultyScoreInfo | undefined> => {
+  return apiLookup<SongDifficultyScoreInfo>(
+    `scores/${songId}/difficulties/${difficultyId}`,
+  );
 };
 
 const getScoreTable = async (type: "level" | "difficulty") => {
@@ -47,8 +67,10 @@ const getImage = (image: String): string => {
 
 export {
   getNowPlayingSong,
+  getSongDifficultyScoreInfo,
   getHistory,
   getImage,
   getScoreTable,
-  openKonasteWebsocket,
+  openGameUiWebSocket,
+  openNowPlayingStatsWebSocket,
 };

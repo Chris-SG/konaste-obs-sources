@@ -1,4 +1,4 @@
-const Number1 = ({ fill }: { fill: string }) => {
+const Period = ({ fill }: { fill: string }) => {
   return (
     <svg
       width="72"
@@ -7,14 +7,17 @@ const Number1 = ({ fill }: { fill: string }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="M37 17V16H36H21.4142L36.4142 1H52V71H37V17Z"
+      <rect
+        x="31"
+        y="60"
+        width="10"
+        height="10"
         fill={fill}
         stroke="black"
-        strokeWidth="2"
+        stroke-width="2"
       />
     </svg>
   );
 };
 
-export default Number1;
+export default Period;

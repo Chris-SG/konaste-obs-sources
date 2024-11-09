@@ -1,4 +1,4 @@
-const Number7 = () => {
+const Number7 = ({ fill }: { fill: string }) => {
   return (
     <svg
       width="72"
@@ -9,13 +9,13 @@ const Number7 = () => {
     >
       <path
         d="M1 1H70.3391L62.3979 16H1V1Z"
-        fill="url(#paint0_linear_28_43)"
+        fill={fill}
         stroke="black"
         strokeWidth="2"
       />
       <path
         d="M38.3453 71H21.5274L44.6547 18H61.4726L38.3453 71Z"
-        fill="url(#paint0_linear_28_43)"
+        fill={fill}
         stroke="black"
         strokeWidth="2"
       />

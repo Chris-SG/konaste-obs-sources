@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 
-import ScoreView from "../gameplay/score/ScoreView.tsx";
+import ScoreView, { ComparisonType } from "../gameplay/score/ScoreView.tsx";
 
 const ScoreTestView = () => {
   const [score, setScore] = React.useState(0),
-    [rate, setRate] = React.useState("00.00");
+    [rate, setRate] = React.useState(0);
   useEffect(() => {
-    setRate((score / 100000).toFixed(2));
+    setRate(score / 100000);
     if (score >= 10000000) {
       setTimeout(() => {
         setScore(0);
@@ -19,7 +19,13 @@ const ScoreTestView = () => {
     }
   }, [score]);
 
-  return <ScoreView score={score} ex={5730} missedEx={573} rate={rate} />;
+  return (
+    <ScoreView
+      score={score}
+      comparisonType={ComparisonType.PERCENTAGE}
+      comparison={rate}
+    />
+  );
 };
 
 export default ScoreTestView;

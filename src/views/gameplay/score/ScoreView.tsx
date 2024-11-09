@@ -4,48 +4,63 @@ import { useEffect } from "react";
 import useCount from "../../../hooks/CountHook.tsx";
 import RenderedNumber from "../../../assets/numbers";
 
+enum ComparisonType {
+  NUMBER,
+  PERCENTAGE,
+  NONE,
+}
+
 type ScoreViewProps = {
   score: number;
-  ex: number;
-  missedEx: number;
-  rate: string;
+  comparison: number;
+  comparisonType: ComparisonType;
 };
 
-const ScoreView = ({ score, ex }: ScoreViewProps) => {
-  const { count, setStart, setEnd } = useCount({ duration: 1500 }),
+const GetComparisonView = (value: number, comparisonType: ComparisonType) => {
+  switch (comparisonType) {
+    case ComparisonType.NUMBER:
+      return <RenderedNumber value={value} length={8} />;
+    case ComparisonType.PERCENTAGE:
+      return (
+        <RenderedNumber
+          value={value.toFixed(2).padStart(6, "0")}
+          percentage
+          length={5}
+        />
+      );
+    case ComparisonType.NONE:
+      return <></>;
+  }
+};
+
+const ScoreView = ({ score, comparison, comparisonType }: ScoreViewProps) => {
+  const { count, setStart, setEnd } = useCount({ duration: 1500, sigfig: 0 }),
     {
-      count: exCount,
-      setStart: setExStart,
-      setEnd: setExEnd,
-    } = useCount({ duration: 1500 });
+      count: comparisonCount,
+      setStart: setComparisonStart,
+      setEnd: setComparisonEnd,
+    } = useCount({ duration: 1500, sigfig: 2 });
 
   useEffect(() => {
     setStart(count);
     setEnd(score);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [score]);
 
   useEffect(() => {
-    setExStart(exCount);
-    setExEnd(ex);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ex]);
+    setComparisonStart(comparisonCount);
+    setComparisonEnd(comparison);
+  }, [comparison]);
 
-  return <RenderedNumber value={count} length={8} />;
-
-  // return (
-  //   <>
-  //     <div id="score-view">
-  //       <div id="score" className={`grade-${GetGrade(count)}`}>
-  //         {`00000000${count}`.slice(-8)}
-  //       </div>
-  //       <div id="ex" className={`grade-${GetGrade(count)}`}>
-  //         {exCount}
-  //       </div>
-  //       <div id="rate">{rate}</div>
-  //     </div>
-  //   </>
-  // );
+  return (
+    <div className="w-2/3">
+      <RenderedNumber value={count} length={8} />
+      <div className="float-right w-1/2">
+        {GetComparisonView(comparisonCount, comparisonType)}
+      </div>
+    </div>
+  );
 };
 
 export default ScoreView;
+
+export { ComparisonType };
