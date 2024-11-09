@@ -34,12 +34,12 @@ const GetComparisonView = (value: number, comparisonType: ComparisonType) => {
 };
 
 const ScoreView = ({ score, comparison, comparisonType }: ScoreViewProps) => {
-  const { count, setStart, setEnd } = useCount({ duration: 1500, sigfig: 0 }),
-    {
-      count: comparisonCount,
-      setStart: setComparisonStart,
-      setEnd: setComparisonEnd,
-    } = useCount({ duration: 1500, sigfig: 2 });
+  const { count, setStart, setEnd } = useCount({ duration: 1500, sigfig: 0 });
+  const {
+    count: comparisonCount,
+    setStart: setComparisonStart,
+    setEnd: setComparisonEnd,
+  } = useCount({ duration: 1500, sigfig: 2 });
 
   useEffect(() => {
     setStart(count);

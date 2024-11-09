@@ -85,12 +85,16 @@ const calculateComparisonValue = (
             Math.max(scoreInfo.konasteEx, scoreInfo.arcadeEx),
           );
     case "current_max_percent":
+      // todo: Determine new approach for calculating score % - total ex includes scrit which does not impact score
       return scoreType === "score"
         ? calculatePercentage(
             stats.score,
-            Math.floor(10000000 * (stats.ex / (stats.missedEx + stats.ex))),
+            Math.floor(
+              10000000 -
+                Math.floor(10000000 * (stats.ex / (stats.missedEx + stats.ex))),
+            ),
           )
-        : calculatePercentage(stats.ex, stats.ex / (stats.missedEx + stats.ex));
+        : calculatePercentage(stats.ex, stats.missedEx + stats.ex);
     case "none":
       return 0;
   }
@@ -108,6 +112,9 @@ const Score = () => {
   const [konasteApi, setKonasteApi] = useState<WebSocket>();
   const [scoreInfo, setScoreInfo] = useState<SongDifficultyScoreInfo>();
   const [stats, setStats] = useState<Stats | undefined>(undefined);
+
+  const [score, setScore] = useState(0);
+  const [comparison, setComparison] = useState(0);
 
   const messageEventListener = async (event: MessageEvent<string>) => {
     if (event.data === "null") {
@@ -135,6 +142,24 @@ const Score = () => {
       konasteApi.removeEventListener("message", messageEventListener);
   }, [konasteApi]);
 
+  useEffect(() => {
+    const targetScore =
+      scoreType === "score" ? stats?.score || 0 : stats?.ex || 0;
+    if (score !== targetScore) {
+      setScore(targetScore);
+    }
+    if (scoreInfo === undefined || stats === undefined) return;
+    const targetComparison = calculateComparisonValue(
+      scoreInfo,
+      stats,
+      scoreType,
+      displayMode,
+    );
+    if (comparison !== targetComparison && !Number.isNaN(targetComparison)) {
+      setComparison(targetComparison);
+    }
+  }, [scoreInfo, stats]);
+
   if (
     konasteApi === undefined ||
     stats === undefined ||
@@ -143,17 +168,10 @@ const Score = () => {
     return <></>;
   }
 
-  const score = scoreType == "score" ? stats.score : stats.ex;
-
   return (
     <ScoreView
       score={score}
-      comparison={calculateComparisonValue(
-        scoreInfo,
-        stats,
-        scoreType,
-        displayMode,
-      )}
+      comparison={comparison}
       comparisonType={
         (displayMode == "none" && ComparisonType.NONE) ||
         (["max_percent", "best_percent", "current_max_percent"].includes(
