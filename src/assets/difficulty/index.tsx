@@ -6,11 +6,12 @@ enum DifficultyOption {
   ADVANCED,
   EXHAUST,
   MAXIMUM,
+  BOOTH, //unused
   INFINITE,
   GRAVITY,
   HEAVENLY,
   VIVID,
-  EXCEED,
+  EXCEED, //unused
 }
 
 const Difficulty = ({

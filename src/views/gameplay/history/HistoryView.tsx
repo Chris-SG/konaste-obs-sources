@@ -66,7 +66,10 @@ const HistoryView = ({
             <td>
               <div className="w-20">
                 <Difficulty
-                  difficulty={DifficultyToNumerical[item.difficulty]}
+                  difficulty={
+                    DifficultyToNumerical[item.difficulty] +
+                    (item.difficulty === "infinite" ? item.infiniteVersion : 0)
+                  }
                   level={item.level}
                 />
               </div>

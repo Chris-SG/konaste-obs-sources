@@ -27,7 +27,6 @@ const easeOutQuad = (t: number) => t * (2 - t),
           clearInterval(counter.current);
         }
       }, frameDuration);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [end]);
 
     return { count, setStart, setEnd };

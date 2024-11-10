@@ -102,7 +102,7 @@ function App() {
           <Route path="/nowplaying" nest>
             <Route path="/song">
               <NowPlayingSongView
-                songName="Song Name Here"
+                songName="A Very Long Song Name Here"
                 artist="Artist Name"
                 level={20}
                 difficulty="infinite"
