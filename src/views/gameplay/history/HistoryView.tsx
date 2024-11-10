@@ -62,9 +62,9 @@ const HistoryView = ({
     <table className="table-fixed content-evenly w-full absolute left-0 top-0">
       <tbody>
         {history.map((item) => (
-          <tr className={"flex h-20 [&_td]:content-center text-gray-200"}>
+          <tr className={"flex h-fit [&_td]:content-center text-gray-200"}>
             <td>
-              <div className="w-20">
+              <div className="w-10">
                 <Difficulty
                   difficulty={
                     DifficultyToNumerical[item.difficulty] +
@@ -74,24 +74,24 @@ const HistoryView = ({
                 />
               </div>
             </td>
-            <td>
+            <td className="w-10">
               <ClearMark markType={item.clearMark} />
             </td>
             <td className="w-3/6">
-              <div className="invisible">_</div>
-              <div className="font-bold text-2xl truncate">{item.songName}</div>
+              {/*<div className="invisible">_</div>*/}
+              <div className="font-bold text-xl truncate">{item.songName}</div>
               <div className="text-sm text-gray-400">{item.artist}</div>
             </td>
             <td className="w-1/6">
-              <div className="invisible">_</div>
-              <div className="font-bold text-2xl">{item.score}</div>
+              {/*<div className="invisible">_</div>*/}
+              <div className="font-bold text-xl">{item.score}</div>
               <div className="text-sm text-gray-400">
                 {calculateScoreUnderValue(item, scoreForm)}
               </div>
             </td>
             <td className="w-1/6">
-              <div className="invisible">_</div>
-              <div className="font-bold text-2xl">{item.exScore}</div>
+              {/*<div className="invisible">_</div>*/}
+              <div className="font-bold text-xl">{item.exScore}</div>
               <div className="text-sm text-gray-400">
                 {calculateExUnderValue(item, exForm)}
               </div>
