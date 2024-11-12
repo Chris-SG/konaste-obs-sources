@@ -18,9 +18,13 @@ const Number4 = ({ fill }: { fill: string }) => {
         fill={fill}
         stroke="black"
         strokeWidth="2"
+      />
+      <path
+        d="M18 18H38V38H18V18Z"
+        stroke="black"
+        strokeWidth="2"
         mask="url(#mask_number_4)"
       />
-      <path d="M18 18H38V38H18V18Z" stroke="black" strokeWidth="2" />
     </svg>
   );
 };

@@ -29,8 +29,8 @@ function App() {
         <ObsController />
       </Route>
       <Route path="/gameplay" nest>
-        <Route path="/table">
-          <ScoreTable type={"mark"} grouping={"level"} />
+        <Route path="/table/:type/:clear">
+          <ScoreTable />
         </Route>
         <Route path="/score">
           <Score />
@@ -96,6 +96,9 @@ function App() {
                   ],
                 ])
               }
+              clearType={"mark"}
+              clearTypeStart={0}
+              clearTypeEnd={19}
               additive={true}
             />
           </Route>

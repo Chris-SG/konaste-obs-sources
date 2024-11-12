@@ -8,7 +8,11 @@ module.exports = {
         fontFamily: {
             "inter": ['Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif']
         },
-        extend: {}
+        extend: {
+            scale: {
+                '1/3': '33.333333%'
+            }
+        }
     },
     plugins: [
         require('@tailwindcss/typography'),

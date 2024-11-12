@@ -1,4 +1,5 @@
 import LetterA from "./LetterA.tsx";
+import LetterAv2 from "./LetterAv2.tsx";
 import LetterC from "./LetterC.tsx";
 import LetterD from "./LetterD.tsx";
 import LetterE from "./LetterE.tsx";
@@ -11,6 +12,7 @@ import LetterY from "./LetterY.tsx";
 
 export {
   LetterA,
+  LetterAv2,
   LetterC,
   LetterD,
   LetterE,

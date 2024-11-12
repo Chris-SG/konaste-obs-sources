@@ -12,6 +12,7 @@ import { SongDifficultyScoreInfo } from "../../../clients/KonasteModels.ts";
 interface Stats {
   chartMaxEx: number;
   chartMaxCombo: number;
+  currentNoteCount: number;
   maxCombo: number;
   score: number;
   ex: number;
@@ -50,6 +51,8 @@ const asDisplayMode = (mode: String): DisplayMode => {
 };
 
 const calculatePercentage = (score: number, comparison: number): number => {
+  if (score === 0) return 0;
+  if (comparison === 0) return 100;
   return (score * 100) / comparison;
 };
 
@@ -85,13 +88,14 @@ const calculateComparisonValue = (
             Math.max(scoreInfo.konasteEx, scoreInfo.arcadeEx),
           );
     case "current_max_percent":
-      // todo: Determine new approach for calculating score % - total ex includes scrit which does not impact score
       return scoreType === "score"
         ? calculatePercentage(
             stats.score,
             Math.floor(
               10000000 -
-                Math.floor(10000000 * (stats.ex / (stats.missedEx + stats.ex))),
+                Math.floor(
+                  10000000 * (stats.currentNoteCount / stats.maxCombo),
+                ),
             ),
           )
         : calculatePercentage(stats.ex, stats.missedEx + stats.ex);

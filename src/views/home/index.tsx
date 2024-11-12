@@ -1,5 +1,13 @@
 // import "./home.css";
 
+import GradeA from "../../assets/grades/GradeA.tsx";
+import GradeAA from "../../assets/grades/GradeAA.tsx";
+import GradeAAA from "../../assets/grades/GradeAAA.tsx";
+import GradeAPlus from "../../assets/grades/GradeAPlus.tsx";
+import GradeAAPlus from "../../assets/grades/GradeAAPlus.tsx";
+import GradeAAAPlus from "../../assets/grades/GradeAAAPlus.tsx";
+import GradeS from "../../assets/grades/GradeS.tsx";
+
 const Home = () => (
   <div className="font-inter flex flex-col m-auto prose">
     {location.protocol.startsWith("http") && (
@@ -12,7 +20,27 @@ const Home = () => (
         <a href="/instructions/websockets">WebSockets Instructions</a> page.
       </div>
     )}
-
+    <div className="w-20 h-20">
+      <GradeA />
+    </div>
+    <div className="w-20 h-20">
+      <GradeAPlus />
+    </div>
+    <div className="w-20 h-20">
+      <GradeAA />
+    </div>
+    <div className="w-20 h-20">
+      <GradeAAPlus />
+    </div>
+    <div className="w-20 h-20">
+      <GradeAAA />
+    </div>
+    <div className="w-20 h-20">
+      <GradeAAAPlus />
+    </div>
+    <div className="w-20 h-20">
+      <GradeS />
+    </div>
     <h1>Welcome to Konaste API</h1>
     <p>
       This tool provides a number of browser sources that can provide

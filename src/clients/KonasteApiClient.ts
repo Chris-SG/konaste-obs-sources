@@ -44,16 +44,21 @@ const getSongDifficultyScoreInfo = async (
   );
 };
 
-const getScoreTable = async (type: "level" | "difficulty") => {
-  return apiLookup<ScoreTableType>(`scores/table/${type}/mark`).then((data) => {
-    if (!data) return data;
-    return new Map(
-      Object.entries(data).map(([key, innerObject]) => [
-        key,
-        new Map(Object.entries(innerObject as Record<string, number>)),
-      ]),
-    ) as unknown as ScoreTableType;
-  });
+const getScoreTable = async (
+  type: "level" | "difficulty",
+  clear: "mark" | "grade",
+) => {
+  return apiLookup<ScoreTableType>(`scores/table/${type}/${clear}`).then(
+    (data) => {
+      if (!data) return data;
+      return new Map(
+        Object.entries(data).map(([key, innerObject]) => [
+          key,
+          new Map(Object.entries(innerObject as Record<string, number>)),
+        ]),
+      ) as unknown as ScoreTableType;
+    },
+  );
 };
 
 const getHistory = async (): Promise<Array<History> | undefined> => {

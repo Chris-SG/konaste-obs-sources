@@ -19,7 +19,7 @@ interface NowPlayingSongModel {
 
 type ClearMarkType = "no" | "played" | "comp" | "ex" | "uc" | "puc";
 
-type Grade =
+type GradeType =
   | "S"
   | "AAA+"
   | "AAA"
@@ -46,24 +46,11 @@ interface History {
   maxEx: number;
   clearMark: ClearMarkType;
   bestClearMark: ClearMarkType;
-  grade: Grade;
-  bestGrade: Grade;
+  grade: GradeType;
+  bestGrade: GradeType;
   imagePath: string;
 }
 
-/*
-    val difficulty: Int,
-    val konasteScore: Int,
-    val konasteEx: Int,
-    val konasteClearType: Int,
-    val konasteGrade: Int,
-    val maxChain: Int,
-    val timestamp: Int,
-    val arcadeScore: Int,
-    val arcadeEx: Int,
-    val arcadeClearType: Int,
-    val arcadeGrade: Int,
- */
 interface SongDifficultyScoreInfo {
   difficulty: number;
   konasteScore: number;
@@ -86,12 +73,12 @@ const DifficultyToNumerical: { [index: string]: number } = {
   infinite: 4,
 };
 
-type ScoreTableType = Map<number, Map<ClearMarkType, number>>;
+type ScoreTableType = Map<number, Map<ClearMarkType | GradeType, number>>;
 
 export type {
   ClearMarkType,
   History,
-  Grade,
+  GradeType,
   NowPlayingSongModel,
   SongDifficultyScoreInfo,
   ScoreTableType,
