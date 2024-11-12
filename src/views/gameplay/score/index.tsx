@@ -92,10 +92,7 @@ const calculateComparisonValue = (
         ? calculatePercentage(
             stats.score,
             Math.floor(
-              10000000 -
-                Math.floor(
-                  10000000 * (stats.currentNoteCount / stats.maxCombo),
-                ),
+              10000000 * (stats.currentNoteCount / stats.chartMaxCombo),
             ),
           )
         : calculatePercentage(stats.ex, stats.missedEx + stats.ex);
