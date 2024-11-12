@@ -18,13 +18,13 @@ const Difficulty = ({
   difficulty,
   level,
 }: {
-  difficulty: DifficultyOption;
+  difficulty: string;
   level: number;
 }) => {
   return (
     <>
       <svg
-        className={`difficulty ${DifficultyOption[difficulty].toLowerCase()}`}
+        className={`difficulty ${difficulty.toLowerCase()}`}
         width="100%"
         height="100%"
         id="difficulty-view"
@@ -68,7 +68,7 @@ const Difficulty = ({
             </feMerge>
           </filter>
         </defs>
-        <Hexagon id={DifficultyOption[difficulty].toLowerCase()} />
+        <Hexagon id={difficulty.toLowerCase()} />
         <text id="difficulty-number" x="50" y="58" viewBox="0 0 100 100">
           {level}
         </text>
@@ -77,9 +77,9 @@ const Difficulty = ({
           x="50"
           y="76"
           viewBox="0 0 100 100"
-          className={`${DifficultyOption[difficulty].toLowerCase()}`}
+          className={`${difficulty.toLowerCase()}`}
         >
-          {DifficultyOption[difficulty].toUpperCase()}
+          {difficulty.toUpperCase()}
         </text>
       </svg>
     </>

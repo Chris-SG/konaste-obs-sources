@@ -1,9 +1,6 @@
 import "./historyview.css";
 
-import {
-  DifficultyToNumerical,
-  History,
-} from "../../../clients/KonasteModels.ts";
+import { History } from "../../../clients/KonasteModels.ts";
 import ClearMark from "../../../assets/clear-mark";
 import Difficulty from "../../../assets/difficulty";
 
@@ -65,13 +62,7 @@ const HistoryView = ({
           <tr className={"flex h-fit [&_td]:content-center text-gray-200"}>
             <td>
               <div className="w-10">
-                <Difficulty
-                  difficulty={
-                    DifficultyToNumerical[item.difficulty] +
-                    (item.difficulty === "infinite" ? item.infiniteVersion : 0)
-                  }
-                  level={item.level}
-                />
+                <Difficulty difficulty={item.difficulty} level={item.level} />
               </div>
             </td>
             <td className="w-10">

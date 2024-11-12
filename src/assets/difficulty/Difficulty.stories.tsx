@@ -1,10 +1,19 @@
-import Difficulty, { DifficultyOption } from "./index.tsx";
+import Difficulty from "./index.tsx";
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof Difficulty> = {
   component: Difficulty,
   argTypes: {
-    difficulty: [...Array(7).keys()],
+    difficulty: Array.of(
+      "novice",
+      "advanced",
+      "exhaust",
+      "maximum",
+      "infinite",
+      "gravity",
+      "heavenly",
+      "vivid",
+    ),
     level: {
       options: [...Array(20).keys()].map((i) => i + 1),
     },
@@ -16,16 +25,10 @@ type Story = StoryObj<typeof Difficulty>;
 
 export const Primary: Story = {
   args: {
-    difficulty: DifficultyOption.NOVICE,
+    difficulty: "novice",
     level: 1,
   },
-  render: ({
-    difficulty,
-    level,
-  }: {
-    difficulty: DifficultyOption;
-    level: number;
-  }) => {
+  render: ({ difficulty, level }: { difficulty: string; level: number }) => {
     return (
       <div
         style={{
