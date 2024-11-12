@@ -13,13 +13,13 @@ const ScoreTable = () => {
     urlSearchParams.get("difficulty_start") || "0",
   );
   const difficultyEnd: number = Number.parseInt(
-    urlSearchParams.get("difficulty_end") || "19",
+    urlSearchParams.get("difficulty_end") || "20",
   );
   const clearTypeStart: number = Number.parseInt(
     urlSearchParams.get("clear_type_start") || "0",
   );
   const clearTypeEnd: number = Number.parseInt(
-    urlSearchParams.get("clear_type_end") || "9",
+    urlSearchParams.get("clear_type_end") || "10",
   );
   const additive: boolean = urlSearchParams.get("additive") !== null;
 

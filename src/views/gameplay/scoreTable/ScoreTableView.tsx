@@ -32,6 +32,7 @@ const gradeTypes: Array<GradeType> = Array.of(
 const buildItemRow = (
   heading: string,
   v: Map<ClearMarkType | GradeType, number>,
+  clearType: "mark" | "grade",
   additive: boolean,
   start: number,
   end: number,
@@ -41,11 +42,12 @@ const buildItemRow = (
   mapAsArray.map(([_, v]) => {
     total += v;
   });
+  const columns = clearType === "mark" ? clearTypes : gradeTypes;
   return (
     <>
       <th className="font-bold text-4xl text-yellow-300">{heading}</th>
-      {mapAsArray.map(
-        ([_, v], index) =>
+      {columns.map(
+        (c, index) =>
           start <= index &&
           index <= end && (
             <td className="text-2xl text-gray-200">
@@ -54,7 +56,7 @@ const buildItemRow = (
                     .slice(index)
                     .map(([_, n]) => n)
                     .reduce((a, b) => a + b, 0)
-                : v}
+                : v.get(c)}
               /{total}
             </td>
           ),
@@ -95,7 +97,7 @@ const ScoreTableView = ({
                   </td>
                 ))
               : topRow.map((type) => (
-                  <td>
+                  <td className="h-10">
                     <Grade gradeType={type as GradeType} />
                   </td>
                 ))}
@@ -105,6 +107,7 @@ const ScoreTableView = ({
               {buildItemRow(
                 key.toString(),
                 value,
+                clearType,
                 additive,
                 clearTypeStart,
                 clearTypeEnd,
