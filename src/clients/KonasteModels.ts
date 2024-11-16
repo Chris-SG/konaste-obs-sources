@@ -73,7 +73,22 @@ const DifficultyToNumerical: { [index: string]: number } = {
   infinite: 4,
 };
 
-type ScoreTableType = Map<number, Map<ClearMarkType | GradeType, number>>;
+type TableTitle = {
+  title: string;
+  count: number;
+};
+
+type TableRow = {
+  data: Array<number>;
+};
+
+type ScoreTableType = {
+  columnTitles: Array<TableTitle>;
+  rowTitles: Array<TableTitle>;
+  rows: Array<TableRow>;
+};
+
+// type ScoreTableType = Map<number, Map<ClearMarkType | GradeType, number>>;
 
 export type {
   ClearMarkType,
@@ -82,6 +97,8 @@ export type {
   NowPlayingSongModel,
   SongDifficultyScoreInfo,
   ScoreTableType,
+  TableRow,
+  TableTitle,
 };
 
 export { DifficultyToNumerical };

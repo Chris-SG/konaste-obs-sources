@@ -2,65 +2,44 @@ import {
   ClearMarkType,
   GradeType,
   ScoreTableType,
+  TableRow,
+  TableTitle,
 } from "../../../clients/KonasteModels.ts";
 import ClearMark from "../../../assets/clear-mark";
 import Grade from "../../../assets/grades";
+//
+// const clearTypes: Array<ClearMarkType> = Array.of(
+//   "no",
+//   "played",
+//   "comp",
+//   "ex",
+//   "uc",
+//   "puc",
+// );
+//
+// const gradeTypes: Array<GradeType> = Array.of(
+//   "no",
+//   "D",
+//   "C",
+//   "B",
+//   "A",
+//   "A+",
+//   "AA",
+//   "AA+",
+//   "AAA",
+//   "AAA+",
+//   "S",
+// );
 
-const clearTypes: Array<ClearMarkType> = Array.of(
-  "no",
-  "played",
-  "comp",
-  "ex",
-  "uc",
-  "puc",
-);
-
-const gradeTypes: Array<GradeType> = Array.of(
-  "no",
-  "D",
-  "C",
-  "B",
-  "A",
-  "A+",
-  "AA",
-  "AA+",
-  "AAA",
-  "AAA+",
-  "S",
-);
-
-const buildItemRow = (
-  heading: string,
-  v: Map<ClearMarkType | GradeType, number>,
-  clearType: "mark" | "grade",
-  additive: boolean,
-  start: number,
-  end: number,
-) => {
-  let total = 0;
-  const mapAsArray = Array.from(v);
-  mapAsArray.map(([_, v]) => {
-    total += v;
-  });
-  const columns = clearType === "mark" ? clearTypes : gradeTypes;
+const buildItemRow = (title: TableTitle, row: TableRow) => {
   return (
     <>
-      <th className="font-bold text-4xl text-yellow-300">{heading}</th>
-      {columns.map(
-        (c, index) =>
-          start <= index &&
-          index <= end && (
-            <td className="text-2xl text-gray-200">
-              {additive
-                ? mapAsArray
-                    .slice(index)
-                    .map(([_, n]) => n)
-                    .reduce((a, b) => a + b, 0)
-                : v.get(c)}
-              /{total}
-            </td>
-          ),
-      )}
+      <th className="font-bold text-4xl text-yellow-300">{title.title}</th>
+      {row.data.map((c) => (
+        <td className="text-2xl text-gray-200">
+          {c}/{title.count}
+        </td>
+      ))}
     </>
   );
 };
@@ -68,22 +47,10 @@ const buildItemRow = (
 const ScoreTableView = ({
   data,
   clearType,
-  clearTypeStart,
-  clearTypeEnd,
-  additive = true,
 }: {
   data: ScoreTableType;
   clearType: "mark" | "grade";
-  clearTypeStart: number;
-  clearTypeEnd: number;
-  additive: boolean;
 }) => {
-  let topRow;
-  if (clearType === "mark") {
-    topRow = clearTypes.slice(clearTypeStart, clearTypeEnd + 1);
-  } else {
-    topRow = gradeTypes.slice(clearTypeStart, clearTypeEnd + 1);
-  }
   return (
     <>
       <table className="table-auto content-evenly absolute left-0 top-0 border-2 [&_td]:border-gray-400 [&_td]:w-1/16 [&_td]:h-16 [&_td]:p-2 [&_td]:border-2">
@@ -91,29 +58,27 @@ const ScoreTableView = ({
           <tr>
             <td></td>
             {clearType === "mark"
-              ? topRow.map((type) => (
+              ? data.columnTitles.map((type) => (
                   <td>
-                    <ClearMark markType={type as ClearMarkType} />
+                    <ClearMark markType={type.title as ClearMarkType} />
                   </td>
                 ))
-              : topRow.map((type) => (
+              : data.columnTitles.map((type) => (
                   <td className="h-10">
-                    <Grade gradeType={type as GradeType} />
+                    <Grade gradeType={type.title as GradeType} />
                   </td>
                 ))}
           </tr>
-          {Array.from(data).map(([key, value]) => (
-            <tr key={key} className="">
-              {buildItemRow(
-                key.toString(),
-                value,
-                clearType,
-                additive,
-                clearTypeStart,
-                clearTypeEnd,
-              )}
-            </tr>
-          ))}
+          {Array.from(data.rowTitles)
+            .map((title, index): [TableTitle, TableRow] => [
+              title,
+              data.rows[index],
+            ])
+            .map(([title, row]) => (
+              <tr key={title.title} className="">
+                {buildItemRow(title, row)}
+              </tr>
+            ))}
         </tbody>
       </table>
     </>

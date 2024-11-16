@@ -13,7 +13,6 @@ import NowPlayingJacket from "./views/gameplay/nowplaying/jacket";
 import Radar from "./assets/radar";
 import HistoryView from "./views/gameplay/history/HistoryView.tsx";
 import History from "./views/gameplay/history";
-import ScoreTableView from "./views/gameplay/scoreTable/ScoreTableView.tsx";
 import ScoreTable from "./views/gameplay/scoreTable";
 
 function App() {
@@ -58,49 +57,49 @@ function App() {
       <Route path="/test" nest>
         <Route path="/gameplay" nest>
           <Route path="table">
-            <ScoreTableView
-              data={
-                new Map([
-                  [
-                    1,
-                    new Map([
-                      ["no", 54],
-                      ["played", 122],
-                      ["comp", 23],
-                      ["ex", 232],
-                      ["uc", 463],
-                      ["puc", 134],
-                    ]),
-                  ],
-                  [
-                    2,
-                    new Map([
-                      ["no", 54],
-                      ["played", 122],
-                      ["comp", 23],
-                      ["ex", 232],
-                      ["uc", 463],
-                      ["puc", 134],
-                    ]),
-                  ],
-                  [
-                    3,
-                    new Map([
-                      ["no", 54],
-                      ["played", 122],
-                      ["comp", 23],
-                      ["ex", 232],
-                      ["uc", 463],
-                      ["puc", 134],
-                    ]),
-                  ],
-                ])
-              }
-              clearType={"mark"}
-              clearTypeStart={0}
-              clearTypeEnd={19}
-              additive={true}
-            />
+            {/*<ScoreTableView*/}
+            {/*  data={*/}
+            {/*    new Map([*/}
+            {/*      [*/}
+            {/*        1,*/}
+            {/*        new Map([*/}
+            {/*          ["no", 54],*/}
+            {/*          ["played", 122],*/}
+            {/*          ["comp", 23],*/}
+            {/*          ["ex", 232],*/}
+            {/*          ["uc", 463],*/}
+            {/*          ["puc", 134],*/}
+            {/*        ]),*/}
+            {/*      ],*/}
+            {/*      [*/}
+            {/*        2,*/}
+            {/*        new Map([*/}
+            {/*          ["no", 54],*/}
+            {/*          ["played", 122],*/}
+            {/*          ["comp", 23],*/}
+            {/*          ["ex", 232],*/}
+            {/*          ["uc", 463],*/}
+            {/*          ["puc", 134],*/}
+            {/*        ]),*/}
+            {/*      ],*/}
+            {/*      [*/}
+            {/*        3,*/}
+            {/*        new Map([*/}
+            {/*          ["no", 54],*/}
+            {/*          ["played", 122],*/}
+            {/*          ["comp", 23],*/}
+            {/*          ["ex", 232],*/}
+            {/*          ["uc", 463],*/}
+            {/*          ["puc", 134],*/}
+            {/*        ]),*/}
+            {/*      ],*/}
+            {/*    ])*/}
+            {/*  }*/}
+            {/*  clearType={"mark"}*/}
+            {/*  clearTypeStart={0}*/}
+            {/*  clearTypeEnd={19}*/}
+            {/*  additive={true}*/}
+            {/*/>*/}
           </Route>
           <Route path="/nowplaying" nest>
             <Route path="/song">
