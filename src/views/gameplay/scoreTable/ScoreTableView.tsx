@@ -49,7 +49,7 @@ const ScoreTableView = ({
   clearType,
 }: {
   data: ScoreTableType;
-  clearType: "mark" | "grade";
+  clearType: "clear_mark" | "grade";
 }) => {
   return (
     <>
@@ -57,7 +57,7 @@ const ScoreTableView = ({
         <tbody>
           <tr>
             <td></td>
-            {clearType === "mark"
+            {clearType === "clear_mark"
               ? data.columnTitles.map((type) => (
                   <td>
                     <ClearMark markType={type.title as ClearMarkType} />

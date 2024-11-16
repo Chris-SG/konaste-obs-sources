@@ -31,7 +31,7 @@ const ScoreTable = () => {
 
   const routeParams = useParams<string>();
   let type = (routeParams[0] || "level") as "level" | "difficulty";
-  const clear = ((routeParams[1] || "mark") as "mark") || "grade";
+  const clear = (routeParams[1] || "clear_mark") as "clear_mark" | "grade";
 
   console.log(type, clear);
 

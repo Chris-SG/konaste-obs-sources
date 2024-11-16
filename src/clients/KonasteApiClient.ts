@@ -45,7 +45,7 @@ const getSongDifficultyScoreInfo = async (
 };
 
 const getScoreTable = async (
-  clear: "mark" | "grade",
+  clear: "clear_mark" | "grade",
   type: "level" | "difficulty",
   aggregation: "none" | "left" | "right" | "up" | "down",
   typeRange: [number, number],
