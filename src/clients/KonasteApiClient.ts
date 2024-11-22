@@ -50,9 +50,10 @@ const getScoreTable = async (
   aggregation: "none" | "left" | "right" | "up" | "down",
   typeRange: [number, number],
   clearRange: [number, number],
+  ignoreMissingItems: boolean,
 ) => {
   return apiLookup<ScoreTableType>(
-    `scores/table/${clear}/${type}?columnRange=${typeRange[0]}..${typeRange[1]}&rowRange=${clearRange[0]}..${clearRange[1]}&aggregation=${aggregation}`,
+    `scores/table/${clear}/${type}?columnRange=${typeRange[0]}..${typeRange[1]}&rowRange=${clearRange[0]}..${clearRange[1]}&aggregation=${aggregation}&ignoreMissingItems=${ignoreMissingItems}`,
   );
 };
 

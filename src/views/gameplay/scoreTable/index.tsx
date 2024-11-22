@@ -21,6 +21,9 @@ const ScoreTable = () => {
   const rowEnd: number = Number.parseInt(
     urlSearchParams.get("row_end") || "20",
   );
+  const ignoreMissingItems: boolean =
+    urlSearchParams.get("ignore_missing_items") === "true";
+
   const aggregation =
     (urlSearchParams.get("aggregation") as
       | "left"
@@ -33,8 +36,6 @@ const ScoreTable = () => {
   let type = (routeParams[0] || "level") as "level" | "difficulty";
   const clear = (routeParams[1] || "clear_mark") as "clear_mark" | "grade";
 
-  console.log(type, clear);
-
   useEffect(() => {
     document.documentElement.classList.add("transparent");
   }, []);
@@ -46,6 +47,7 @@ const ScoreTable = () => {
       aggregation,
       [colStart, colEnd],
       [rowStart, rowEnd],
+      ignoreMissingItems,
     ).then((table) => {
       if (table === undefined) {
         return;
